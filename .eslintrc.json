@@ -1,0 +1,35 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-next"
+  ],
+  "overrides": [
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-console": "error",
+    "no-alert": "error",
+    "curly": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-magic-numbers": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "no-trailing-spaces": "error",
+    "no-unused-expressions": "error",
+    "no-unused-labels": "error"
+  }
+}
