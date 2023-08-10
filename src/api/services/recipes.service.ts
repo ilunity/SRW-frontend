@@ -1,6 +1,6 @@
 import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { axiosInstance } from '@/api/utils';
-import { CreateRecipeDto, IRecipeData, IRecipeShort } from '@/api/interfaces/recipes.types';
+import { CreateRecipeDto, IRecipeData, IRecipeShort, IRecipesIds } from '@/api/interfaces/recipes.types';
 import { FiltersKeys } from '@/api/interfaces/filters.types';
 import { cookieService } from '@/api/services/cookie.service';
 
@@ -14,6 +14,10 @@ class RecipesService {
     });
   }
 
+  get(recipeId: number): ApiRequestFnResponse<IRecipeData> {
+    return axiosInstance.get(`${ url }${ recipeId }/`);
+  }
+
   getShared(filters?: FiltersKeys[]): ApiRequestFnResponse<IRecipeData[]> {
     return axiosInstance.post(`${ url }shared/`, {
       filters_keys: filters,
@@ -24,6 +28,10 @@ class RecipesService {
     return axiosInstance.get(`${ url }my/`, {
       headers: { Authorization: `Bearer ${ token }` },
     });
+  }
+
+  getSharedIds(): ApiRequestFnResponse<IRecipesIds[]> {
+    return axiosInstance.get(`${ url }ids/`);
   }
 
   getCreated(): ApiRequestFnResponse<IRecipeData[]> {

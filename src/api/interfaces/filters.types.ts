@@ -13,6 +13,7 @@ export type GetOneParams = {
 
 export interface IFiltersData {
   id: number;
+  parent_id: number | null;
   left_key: number;
   right_key: number;
   level: number;

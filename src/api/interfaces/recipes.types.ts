@@ -56,6 +56,10 @@ export interface IRecipeShort {
   comments_number: number;
 }
 
+export interface IRecipesIds {
+  id: number;
+}
+
 // DTOs
 
 interface DescriptionDto {
