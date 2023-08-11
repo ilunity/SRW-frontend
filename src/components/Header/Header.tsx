@@ -1,12 +1,11 @@
 import React from 'react';
-import { HeaderProps } from './Header.types';
 import { AppBar, Button, Container, Stack, Toolbar, Typography, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
-import { CreatorAvatar } from '@/components/CreatorAvatar';
+import { UserInfo } from 'src/components/UserInfo';
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC = () => {
   const theme = useTheme();
   const user = useSelector((state: RootState) => state.user.payload);
 
@@ -38,7 +37,11 @@ export const Header: React.FC<HeaderProps> = () => {
           >
             <ToggleThemeButton />
             { user &&
-              <CreatorAvatar user={ user } />
+              <UserInfo
+                user={ user }
+                tooltip={ 'Профиль' }
+                link={ '/profile' }
+              />
             }
           </Stack>
         </Toolbar>

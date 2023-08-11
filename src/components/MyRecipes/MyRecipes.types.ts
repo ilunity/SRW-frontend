@@ -1,5 +1,5 @@
-import { IRecipeShort } from '@/api/interfaces/recipes.types';
+import { IRecipePreview } from '@/api/interfaces/recipes.types';
 
 export interface MyRecipesProps {
-  recipes: IRecipeShort[];
+  recipes: IRecipePreview[];
 }

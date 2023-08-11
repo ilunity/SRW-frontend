@@ -30,7 +30,7 @@ export default function CreateRecipe({ filters }: { filters: IFiltersData[] }) {
     }
   }, [user]);
 
-  const createRecipe = () => {
+  const createRecipe = async () => {
     // todo create recipe validation
 
     const { description, ingredients, steps }: CreatedRecipeState = createdRecipe;
@@ -46,7 +46,7 @@ export default function CreateRecipe({ filters }: { filters: IFiltersData[] }) {
       filters: selectedFilters.map(filter => ({ filter_id: filter.id })),
     };
 
-    executeRequest(() => recipesService.create(createRecipeDto));
+    await executeRequest(() => recipesService.create(createRecipeDto));
     dispatch(clearCreatedRecipe());
     dispatch(clearFilters());
   };
