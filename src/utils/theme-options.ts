@@ -9,7 +9,7 @@ export const themeOptions: ThemeOptions = {
           const modifiedStyled: CSSInterpolation = {};
 
           if (theme.palette.mode === 'light' && ownerState.variant === 'outlined') {
-            modifiedStyled.backgroundColor = grey[50];
+            modifiedStyled.backgroundColor = grey['50'];
           }
 
           return modifiedStyled;

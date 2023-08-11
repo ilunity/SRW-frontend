@@ -5,7 +5,7 @@ import { RootState } from '@/redux/store';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { UserInfo } from 'src/components/UserInfo';
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC = () => {
   const theme = useTheme();
   const user = useSelector((state: RootState) => state.user.payload);
 

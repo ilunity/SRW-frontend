@@ -11,18 +11,6 @@ import TextField from '@mui/material/TextField';
 import { UploadImg } from 'src/components/forms/StepsForm/SetStepForm/UploadImg';
 import Button from '@mui/material/Button';
 import { PaperWrapper } from '@/components/layouts/PaperWrapper';
-import { Description } from '@/redux/slices/created-recipe/created-recipe-slice.types';
-
-const defineInitValue = (defaultValue: Description | null | undefined): SetDescriptionFormInputs | undefined => {
-  if (defaultValue === undefined || defaultValue === null) {
-    return undefined;
-  }
-
-  const { img, ...rest } = defaultValue;
-  const defaultImg = img === null ? undefined : img;
-
-  return { img: defaultImg, ...rest };
-};
 
 export const SetDescriptionForm: React.FC<SetDescriptionFormProps> = ({ onSubmit, defaultValue }) => {
   const {
@@ -33,7 +21,7 @@ export const SetDescriptionForm: React.FC<SetDescriptionFormProps> = ({ onSubmit
     watch,
   } = useForm<SetDescriptionFormInputs>({
     resolver: yupResolver(SetDescriptionFormSchema),
-    defaultValues: defineInitValue(defaultValue),
+    defaultValues: defaultValue || undefined,
   });
 
   const isImgLoaded = Boolean(watch('img'));
@@ -72,6 +60,9 @@ export const SetDescriptionForm: React.FC<SetDescriptionFormProps> = ({ onSubmit
           label={ 'Кол-во порций' }
         />
         <UploadImg control={ control } isLoaded={ isImgLoaded } fieldName={ 'img' } />
+        <FormHelperText error={ !!errors.img }>
+          { errors.img && 'Выберите фотографию!' }
+        </FormHelperText>
         <Button variant={ 'contained' } type={ 'submit' }>
           Сохранить
         </Button>

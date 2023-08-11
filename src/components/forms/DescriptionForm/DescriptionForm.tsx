@@ -14,9 +14,8 @@ import { RecipeDescription } from '@/components/RecipeDescription';
 import { RowContainer } from 'src/components/RowContainer';
 import { TimeLabel } from '@/components/labels';
 import { ServingsNumberLabel } from '@/components/labels/ServingsNumberLabel';
-import { CaloriesTable } from '@/components/CaloriesTable';
 
-export const DescriptionForm: React.FC<DescriptionFormProps> = () => {
+export const DescriptionForm: React.FC = () => {
   const [openSetDescriptionModal, setOpenSetDescriptionModal] = useState<boolean>(false);
   const dispatch = useDispatch();
   const description = useSelector((state: RootState) => state.createdRecipe.description);
@@ -70,7 +69,6 @@ export const DescriptionForm: React.FC<DescriptionFormProps> = () => {
                   <TimeLabel time={ description.time } />
                   <ServingsNumberLabel servings_number={ description.servings_number } />
                 </RowContainer>
-                <CaloriesTable cals={ 152 } proteins={ 5 } fats={ 6 } carbs={ 17 } />
               </Stack>
               <RecipeDescription description={ description.description } />
             </>

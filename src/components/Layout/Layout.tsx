@@ -20,7 +20,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           minHeight: '100%',
           display: 'flex',
           flexDirection: 'column',
-          background: (theme) => theme.palette.mode === 'light' ? blue[50] : theme.palette.background.default,
+          background: (theme) => theme.palette.mode === 'light' ? blue['50'] : theme.palette.background.default,
         } }
       >
         <Header />
