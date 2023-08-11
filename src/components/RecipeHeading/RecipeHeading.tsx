@@ -1,18 +1,8 @@
 import React from 'react';
 import { RecipeHeadingProps } from './RecipeHeading.types';
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, CardHeader, CardMedia, Stack, Typography } from '@mui/material';
 import { RecipeDescription } from '@/components/RecipeDescription';
+import { UserInfo } from '@/components/UserInfo';
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -31,18 +21,10 @@ export const RecipeHeading: React.FC<RecipeHeadingProps> = ({ recipe }) => {
             <Typography variant={ 'h4' } component={ 'h1' }>
               { recipe.title }
             </Typography>
-            <ListItem component={ 'div' } sx={ { width: 'auto' } }>
-              <ListItemAvatar>
-                <Avatar
-                  alt='Аватар пользователя'
-                  src={ HOST + recipe.user.avatar }
-                  variant={ 'rounded' }
-                >
-                  { recipe.user.username[0].toUpperCase() }
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={ recipe.user.username } />
-            </ListItem>
+            <UserInfo
+              user={ recipe.user }
+              tooltip={ recipe.user.username }
+            />
           </Stack>
         }
       />
@@ -54,11 +36,11 @@ export const RecipeHeading: React.FC<RecipeHeadingProps> = ({ recipe }) => {
           sx={ {
             mb: 4,
             borderRadius: 2,
-            height:{
+            height: {
               xs: 200,
               sm: 300,
               md: 350,
-            }
+            },
           } }
         />
         <RecipeDescription description={ recipe.description } />

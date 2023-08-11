@@ -25,7 +25,6 @@ const defineInitValue = (defaultValue: Description | null | undefined): SetDescr
 };
 
 export const SetDescriptionForm: React.FC<SetDescriptionFormProps> = ({ onSubmit, defaultValue }) => {
-
   const {
     register,
     handleSubmit,

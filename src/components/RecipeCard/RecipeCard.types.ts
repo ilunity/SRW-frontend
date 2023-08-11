@@ -1,5 +1,5 @@
-import { IRecipeData } from '@/utils/types';
+import { IRecipePreview } from '@/utils/types';
 
 export interface RecipeCardProps {
-  recipe: IRecipeData;
+  recipe: IRecipePreview;
 }

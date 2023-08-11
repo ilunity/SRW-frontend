@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { GetServerSideProps } from 'next';
-import { IRecipeData } from '@/utils/types';
+import { IRecipeData, IRecipePreview } from '@/utils/types';
 import { RecipeCard } from '@/components/RecipeCard';
 import { FiltersForm } from 'src/components/forms/FiltersForm';
 import { executeRequest } from '@/api/utils';
@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 
 
 export default function Recipes({ recipes, filters }: {
-  recipes: IRecipeData[],
+  recipes: IRecipePreview[],
   filters: IFiltersData[],
 }) {
   const router = useRouter();
