@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { DescriptionFormProps } from './DescriptionForm.types';
 import { Card, CardContent, CardHeader, CardMedia, Stack } from '@mui/material';
 import { AddBtn } from '@/components/icon-buttons/AddBtn';
 import { useDispatch, useSelector } from 'react-redux';
