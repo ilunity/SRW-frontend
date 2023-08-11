@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 
 type DeliveringStatus = 'success' | 'error' | null;
 
+const BUTTON_INDICATE_TIME = 500;
+
 export const CreateCommentForm: React.FC<CreateCommentFormProps> = ({ onSubmit }) => {
   const {
     register,
@@ -40,7 +42,7 @@ export const CreateCommentForm: React.FC<CreateCommentFormProps> = ({ onSubmit }
           });
         }
 
-        setTimeout(() => setDeliveringStatus(null), 500);
+        setTimeout(() => setDeliveringStatus(null), BUTTON_INDICATE_TIME);
       }) }
     >
       <TextField

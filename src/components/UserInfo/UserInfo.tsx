@@ -11,6 +11,8 @@ const SIZES: Record<USER_INFO_SIZES, number> = {
   [USER_INFO_SIZES.LARGE]: 56,
 };
 
+const AVATAR_WRAPPER_SIZE_MULTIPLIER = 1.5;
+
 export const UserInfo: React.FC<UserInfoProps> = (
   {
     user,
@@ -27,7 +29,7 @@ export const UserInfo: React.FC<UserInfoProps> = (
       disableGutters
     >
       <ListItemAvatar
-        sx={ { minWidth: sizeNumber * 1.5 } }
+        sx={ { minWidth: sizeNumber * AVATAR_WRAPPER_SIZE_MULTIPLIER } }
       >
         <Avatar
           sx={ { width: sizeNumber, height: sizeNumber } }
