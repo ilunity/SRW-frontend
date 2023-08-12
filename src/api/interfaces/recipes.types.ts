@@ -22,16 +22,11 @@ interface User {
   avatar: string;
 }
 
-export interface Comment {
+interface RecipeComment {
   id: number,
   text: string,
   createdAt: string,
   updatedAt: string,
-  userId: number,
-  recipeId: number,
-}
-
-export type RecipeComment = Omit<Comment, 'userId' | 'recipeId'> & {
   user: User,
 }
 
@@ -52,8 +47,13 @@ export interface IRecipeData {
   products: IProduct[];
 }
 
-export type IRecipePreview = Omit<IRecipeData, 'steps' | 'filters'> & {
-  readonly comments_number: number;
+export interface IRecipeShort {
+  id: number;
+  title: string;
+  status: RECIPE_STATUS;
+  avg_rating: number | null;
+  favourites: number;
+  comments_number: number;
 }
 
 export interface IRecipesIds {
@@ -90,8 +90,4 @@ export interface CreateRecipeDto {
   readonly ingredients: RecipeProductDto[];
   readonly steps: RecipeStepDto[];
   readonly filters: RecipeFilterDto[];
-}
-
-export interface CommentRecipeDto {
-  readonly text: string;
 }

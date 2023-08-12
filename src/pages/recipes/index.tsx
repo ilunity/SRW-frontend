@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { GetServerSideProps } from 'next';
-import { IRecipePreview } from '@/utils/types';
+import { IRecipeData } from '@/utils/types';
 import { RecipeCard } from '@/components/RecipeCard';
 import { FiltersForm } from 'src/components/forms/FiltersForm';
 import { executeRequest } from '@/api/utils';
@@ -14,16 +14,15 @@ import { RootState } from '@/redux/store';
 import { useDebounce } from 'use-debounce';
 import { useEffect } from 'react';
 
-const FILTERS_DEBOUNCE_DELAY = 2000;
 
 export default function Recipes({ recipes, filters }: {
-  recipes: IRecipePreview[],
+  recipes: IRecipeData[],
   filters: IFiltersData[],
 }) {
   const router = useRouter();
 
   const selectedFilters = useSelector((state: RootState) => state.selectedFilters);
-  const [selectedFiltersDebounced] = useDebounce(selectedFilters, FILTERS_DEBOUNCE_DELAY);
+  const [selectedFiltersDebounced] = useDebounce(selectedFilters, 2000);
 
   useEffect(() => {
     if (selectedFiltersDebounced.length === 0) {

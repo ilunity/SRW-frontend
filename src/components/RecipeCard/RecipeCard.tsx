@@ -6,7 +6,6 @@ import { TimeLabel } from '@/components/labels';
 import { FavoritesLabel } from '@/components/labels/FavoritesLabel';
 import { IngredientsMenu } from '@/components/IngredientsMenu';
 import Link from 'next/link';
-import { CommentLabel } from '@/components/labels/CommentLabel';
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -52,7 +51,6 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           <RowContainer>
             <TimeLabel time={ recipe.time } />
             <FavoritesLabel count={ recipe.favourites } />
-            <CommentLabel value={ recipe.comments_number } />
           </RowContainer>
         </Box>
       </CardContent>

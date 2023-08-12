@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { IngredientsFormProps } from './IngredientsForm.types';
 import { AddIngredientForm } from 'src/components/forms/IngredientsForm/AddIngredientForm';
 import { IProductData } from '@/api/interfaces/products.types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +14,7 @@ import { AddBtn } from '@/components/icon-buttons/AddBtn';
 import { productsService } from '@/api/services';
 
 
-export const IngredientsForm: React.FC = () => {
+export const IngredientsForm: React.FC<IngredientsFormProps> = () => {
   const [openAddIngredientModal, setOpenAddIngredientModal] = useState<boolean>(false);
   const [products, setProducts] = useState<IProductData[]>([]);
 
@@ -72,7 +73,7 @@ export const IngredientsForm: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              { selectedProducts.map(product => (<IngredientItem key={ product.id } product={ product } />)) }
+              { selectedProducts.map(product => (<IngredientItem key={ product.product_id } product={ product } />)) }
             </TableBody>
           </Table>
         </CardContent>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToogleThemeButtonProps } from './ToogleThemeButton.types';
 import { toggleTheme } from '@/redux/slices';
 import { Switch } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -18,7 +19,7 @@ const ThemeSwitch = styled(Switch)(() => ({
 }));
 
 
-export const ToggleThemeButton: React.FC = () => {
+export const ToggleThemeButton: React.FC<ToogleThemeButtonProps> = () => {
   const { mode } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
 

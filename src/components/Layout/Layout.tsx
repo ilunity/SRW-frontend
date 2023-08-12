@@ -3,7 +3,6 @@ import { Box, Container } from '@mui/material';
 import { LayoutProps } from '@/components/Layout/Layout.types';
 import { Header } from '@/components/Header';
 import React from 'react';
-import { blue } from '@mui/material/colors';
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -17,16 +16,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Box
         sx={ {
           width: 'inherit',
-          minHeight: '100%',
+          minHeight: 'inherit',
           display: 'flex',
           flexDirection: 'column',
-          background: (theme) => theme.palette.mode === 'light' ? blue['50'] : theme.palette.background.default,
         } }
       >
         <Header />
         <Container
           component={ 'main' }
-          sx={ { flex: '1 0 auto' } }
+          sx={ {
+            flex: '1 0 auto',
+          } }
         >
           { children }
         </Container>

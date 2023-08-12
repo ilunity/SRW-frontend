@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Divider, Stack } from '@mui/material';
 import { ProfileInfo } from 'src/components/ProfileInfo';
 import { MyRecipes } from '@/components/MyRecipes';
-import { IRecipePreview } from '@/api/interfaces/recipes.types';
+import { IRecipeShort } from '@/api/interfaces/recipes.types';
 import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services/recipes.service';
 import { LogoutBtn } from '@/components/icon-buttons/LogoutBtn';
@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 
 export default function Profile() {
   const user = useSelector((state: RootState) => state.user.payload);
-  const [recipes, setRecipes] = useState<IRecipePreview[]>([]);
+  const [recipes, setRecipes] = useState<IRecipeShort[]>([]);
   const router = useRouter();
 
   useEffect(() => {

@@ -8,7 +8,6 @@ import { RecipeHeading } from '@/components/RecipeHeading';
 import { RatePanel } from '@/components/RatePanel';
 import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services/recipes.service';
-import { CommentsBlock } from '@/components/CommentsBlock';
 
 export default function Recipe({ recipe }: { recipe: IRecipeData }) {
   return (
@@ -34,7 +33,6 @@ export default function Recipe({ recipe }: { recipe: IRecipeData }) {
       >
         <RecipeHeading recipe={ recipe } />
         <RecipeSteps steps={ recipe.steps } />
-        <CommentsBlock comments={ recipe.comments } recipeId={ recipe.id } />
         <RatePanel />
       </Stack>
       <Ingredients recipeProducts={ recipe.products } />
