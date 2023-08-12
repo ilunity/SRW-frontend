@@ -6,3 +6,10 @@ export interface IProfileData {
   avatar: string;
   role: USER_ROLE;
 }
+
+// DTOs
+
+export interface SignUpDto {
+  readonly username: string;
+  readonly email: string;
+}

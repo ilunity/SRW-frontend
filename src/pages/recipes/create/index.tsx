@@ -26,7 +26,7 @@ export default function CreateRecipe({ filters }: { filters: IFiltersData[] }) {
 
   useEffect(() => {
     if (!user) {
-      router.push('/auth');
+      router.push('/login');
     }
   }, [user]);
 

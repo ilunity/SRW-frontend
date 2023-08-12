@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { stringifyErrorMessage } from '@/api/utils';
 
 type DeliveringStatus = 'success' | 'error' | null;
 
@@ -36,9 +37,7 @@ export const CreateCommentForm: React.FC<CreateCommentFormProps> = ({ onSubmit }
           setDeliveringStatus('error');
           setError('root', {
             type: 'serverError',
-            message: Array.isArray(error.message)
-              ? error.message.reduce((previous, current) => previous + `\n${ current }`)
-              : error.message,
+            message: stringifyErrorMessage(error),
           });
         }
 
