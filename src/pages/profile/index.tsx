@@ -26,7 +26,7 @@ export default function Profile() {
     };
 
     if (!user) {
-      router.push('auth');
+      router.push('login');
     } else {
       loadRecipes();
     }
