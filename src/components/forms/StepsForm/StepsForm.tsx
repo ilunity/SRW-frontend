@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StepsFormProps } from './StepsForm.types';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -10,7 +9,7 @@ import { SetStepForm } from 'src/components/forms/StepsForm/SetStepForm';
 import { SetStepFormInputs } from '@/components/forms/StepsForm/SetStepForm/SetStepForm.types';
 import { addStep } from '@/redux/slices';
 
-export const StepsForm: React.FC<StepsFormProps> = () => {
+export const StepsForm: React.FC = () => {
   const [openAddStepModal, setOpenAddStepModal] = useState<boolean>(false);
   const addedSteps = useSelector((state: RootState) => state.createdRecipe.steps);
   const dispatch = useDispatch();

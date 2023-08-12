@@ -9,7 +9,7 @@ class AuthService {
     return axiosInstance.post(`${ url }login/`, { email });
   }
 
-  public profile(token: any): ApiRequestFnResponse<IProfileData> {
+  public profile(token: string): ApiRequestFnResponse<IProfileData> {
     return axiosInstance.get(`${ url }profile/`, {
       headers: {
         'Authorization': `Bearer ${ token }`,
