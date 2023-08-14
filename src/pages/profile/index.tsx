@@ -11,6 +11,7 @@ import { recipesService } from '@/api/services/recipes.service';
 import { LogoutBtn } from '@/components/icon-buttons/LogoutBtn';
 import { USER_ROLE } from '@/utils/types';
 import Button from '@mui/material/Button';
+import { FavouriteRecipes } from '@/components/FavouriteRecipes';
 
 export default function Profile() {
   const user = useSelector((state: RootState) => state.user.payload);
@@ -64,6 +65,7 @@ export default function Profile() {
         </Stack>
       </Stack>
       <MyRecipes recipes={ recipes } />
+      <FavouriteRecipes />
     </Stack>
   );
 }

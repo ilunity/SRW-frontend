@@ -7,6 +7,10 @@ export interface IProfileData {
   role: USER_ROLE;
 }
 
+export type IRegisterData = IProfileData & {
+  token: string;
+}
+
 // DTOs
 
 export interface SignUpDto {

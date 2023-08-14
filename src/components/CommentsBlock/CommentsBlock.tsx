@@ -3,7 +3,7 @@ import { CommentsBlockProps } from './CommentsBlock.types';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { Comment } from '@/components/CommentsBlock/Comment';
 import { CreateCommentForm } from '@/components/forms/CreateCommentForm';
-import { recipesService } from '@/api/services/recipes.service';
+import { recipesService } from '@/api/services';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { executeRequest } from '@/api/utils';

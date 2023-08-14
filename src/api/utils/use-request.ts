@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { DependencyList, useEffect, useState } from 'react';
 import { ApiRequestFn, IApiError } from '@/api/utils/api.types';
 import { defineAxiosError } from '@/api/utils/define-axios-error';
 
 type IDataState<T> = T | null;
 
-type IStatusState = 'loading' | 'error' | 'success'
+export type IStatusState = 'loading' | 'error' | 'success'
 
-type IErrorState = IApiError | null;
+export type IErrorState = IApiError | null;
 
 interface IRequestState<T> {
   data: IDataState<T>;
@@ -14,7 +14,7 @@ interface IRequestState<T> {
   status: IStatusState;
 }
 
-export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>): IRequestState<DataType> => {
+export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>, deps: DependencyList = []): IRequestState<DataType> => {
   const [state, setState] = useState<IRequestState<DataType>>({
     status: 'loading',
     error: null,
@@ -44,7 +44,7 @@ export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>): IReq
 
   useEffect(() => {
     request();
-  }, [requestFn]);
+  }, deps);
 
   return state;
 };

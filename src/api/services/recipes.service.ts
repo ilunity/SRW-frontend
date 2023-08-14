@@ -11,13 +11,13 @@ import {
 import { FiltersKeys } from '@/api/interfaces/filters.types';
 import { cookieService } from '@/api/services/cookie.service';
 
-const token = cookieService?.getToken();
 const url = axiosInstance.defaults.baseURL + 'recipe/';
+const getToken = () => cookieService.getToken();
 
 class RecipesService {
   create(recipe: CreateRecipeDto) {
     return axiosInstance.post(`${ url }combined/`, recipe, {
-      headers: { Authorization: `Bearer ${ token }` },
+      headers: { Authorization: `Bearer ${ getToken() }` },
     });
   }
 
@@ -33,7 +33,7 @@ class RecipesService {
 
   getMy(): ApiRequestFnResponse<IRecipePreview[]> {
     return axiosInstance.get(`${ url }my/`, {
-      headers: { Authorization: `Bearer ${ token }` },
+      headers: { Authorization: `Bearer ${ getToken() }` },
     });
   }
 
@@ -43,13 +43,21 @@ class RecipesService {
 
   getCreated(): ApiRequestFnResponse<IRecipeData[]> {
     return axiosInstance.get(`${ url }created/`, {
-      headers: { Authorization: `Bearer ${ token }` },
+      headers: { Authorization: `Bearer ${ getToken() }` },
     });
   }
 
   comment(recipeId: number, comment: CommentRecipeDto): ApiRequestFnResponse<Comment> {
     return axiosInstance.post(`${ url }${ recipeId }/comment/`, comment, {
-      headers: { Authorization: `Bearer ${ token }` },
+      headers: { Authorization: `Bearer ${ getToken() }` },
+    });
+  }
+
+  public getAllFavouriteRecipes(): ApiRequestFnResponse<IRecipePreview[]> {
+    return axiosInstance.get(`${ url }favourite`, {
+      headers: {
+        'Authorization': `Bearer ${ getToken() }`,
+      },
     });
   }
 }
