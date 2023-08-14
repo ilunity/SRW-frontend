@@ -7,6 +7,7 @@ export const RowContainer: React.FC<RowContainerProps> = ({ children }) => {
     <Stack
       direction={ 'row' }
       spacing={ 2 }
+      alignItems={ 'center' }
     >
       { children }
     </Stack>

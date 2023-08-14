@@ -10,10 +10,9 @@ import { FiltersForm } from '@/components/forms/FiltersForm';
 import { GetStaticProps } from 'next';
 import { IFiltersData } from '@/api/interfaces/filters.types';
 import { executeRequest } from '@/api/utils';
-import { filtersService } from '@/api/services';
+import { filtersService, recipesService } from '@/api/services';
 import Button from '@mui/material/Button';
 import { CreateRecipeDto } from '@/api/interfaces/recipes.types';
-import { recipesService } from '@/api/services/recipes.service';
 import { clearCreatedRecipe, clearFilters, CreatedRecipeState } from '@/redux/slices';
 
 

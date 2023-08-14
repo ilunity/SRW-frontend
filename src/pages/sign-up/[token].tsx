@@ -12,14 +12,15 @@ export default function SignUp(authProps: TokenAuthPageProps) {
 SignUp.getLayout = getEmptyLayout;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const token = context.query.token as string;
+  const signUpToken = context.query.token as string;
 
   const props = {} as TokenAuthPageProps;
 
-  const { data, error } = await executeRequest(() => authService.register(token));
+  const { data, error } = await executeRequest(() => authService.register(signUpToken));
 
   if (data) {
-    props.userData = data;
+    const { token, ...userData } = data;
+    props.userData = userData;
     props.token = token;
   } else {
     props.error = error;

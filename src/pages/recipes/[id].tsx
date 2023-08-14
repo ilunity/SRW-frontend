@@ -7,10 +7,14 @@ import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
 import { RecipeHeading } from '@/components/RecipeHeading';
 import { RatePanel } from '@/components/RatePanel';
 import { executeRequest } from '@/api/utils';
-import { recipesService } from '@/api/services/recipes.service';
+import { recipesService } from '@/api/services';
 import { CommentsBlock } from '@/components/CommentsBlock';
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
 
 export default function Recipe({ recipe }: { recipe: IRecipeData }) {
+  const user = useSelector((state: RootState) => state.user.payload);
+
   return (
     <Stack
       direction={ 'row' }
@@ -35,7 +39,9 @@ export default function Recipe({ recipe }: { recipe: IRecipeData }) {
         <RecipeHeading recipe={ recipe } />
         <RecipeSteps steps={ recipe.steps } />
         <CommentsBlock comments={ recipe.comments } recipeId={ recipe.id } />
-        <RatePanel />
+        { user &&
+          <RatePanel recipeId={ recipe.id } />
+        }
       </Stack>
       <Ingredients recipeProducts={ recipe.products } />
     </Stack>
