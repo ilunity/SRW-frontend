@@ -1,5 +1,5 @@
-import { IStep } from '@/pages/recipes/[id]';
+import { IRecipeStep } from '@/utils/types';
 
 export interface RecipeStepsProps {
-  steps: IStep[];
+  steps: IRecipeStep[];
 }

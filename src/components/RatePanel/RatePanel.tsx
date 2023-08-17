@@ -1,12 +1,11 @@
 import React from 'react';
-import { RatePanelProps } from './RatePanel.types';
-import { Card, CardContent, Divider, Rating, Stack, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { red } from '@mui/material/colors';
+import { Card, CardContent, Divider, Stack, Typography } from '@mui/material';
+import { RatePanelProps } from '@/components/RatePanel/RatePanel.types';
+import { FavouriteButton } from '@/components/AddFavouriteButton';
+import { RatingButton } from '@/components/RatingButton';
 
 
-export const RatePanel: React.FC<RatePanelProps> = () => {
+export const RatePanel: React.FC<RatePanelProps> = ({ recipeId }) => {
   return (
     <Card
       sx={ {
@@ -27,10 +26,8 @@ export const RatePanel: React.FC<RatePanelProps> = () => {
           <Typography variant={ 'h6' }>
             Оценить
           </Typography>
-          <Button variant={ 'contained' } endIcon={ <FavoriteIcon sx={ { color: red[500] } } /> }>
-            В избранное
-          </Button>
-          <Rating precision={ 0.5 } size={ 'large' } />
+          <FavouriteButton recipeId={ recipeId } />
+          <RatingButton recipeId={ recipeId } />
         </Stack>
       </CardContent>
     </Card>

@@ -10,10 +10,9 @@ import { FiltersForm } from '@/components/forms/FiltersForm';
 import { GetStaticProps } from 'next';
 import { IFiltersData } from '@/api/interfaces/filters.types';
 import { executeRequest } from '@/api/utils';
-import { filtersService } from '@/api/services';
+import { filtersService, recipesService } from '@/api/services';
 import Button from '@mui/material/Button';
 import { CreateRecipeDto } from '@/api/interfaces/recipes.types';
-import { recipesService } from '@/api/services/recipes.service';
 import { clearCreatedRecipe, clearFilters, CreatedRecipeState } from '@/redux/slices';
 
 
@@ -26,11 +25,11 @@ export default function CreateRecipe({ filters }: { filters: IFiltersData[] }) {
 
   useEffect(() => {
     if (!user) {
-      router.push('/auth');
+      router.push('/login');
     }
   }, [user]);
 
-  const createRecipe = () => {
+  const createRecipe = async () => {
     // todo create recipe validation
 
     const { description, ingredients, steps }: CreatedRecipeState = createdRecipe;
@@ -46,7 +45,7 @@ export default function CreateRecipe({ filters }: { filters: IFiltersData[] }) {
       filters: selectedFilters.map(filter => ({ filter_id: filter.id })),
     };
 
-    executeRequest(() => recipesService.create(createRecipeDto));
+    await executeRequest(() => recipesService.create(createRecipeDto));
     dispatch(clearCreatedRecipe());
     dispatch(clearFilters());
   };

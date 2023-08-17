@@ -1,7 +1,3 @@
-import { ReactNode } from 'react';
+import { IconButtonProps } from '@mui/material';
 
-export interface IconButtonLayoutProps {
-  title: string;
-  onClick: () => void;
-  children: ReactNode;
-}
+export type IconButtonLayoutProps = Pick<IconButtonProps, 'size' | 'title' | 'children' | 'onClick'>;

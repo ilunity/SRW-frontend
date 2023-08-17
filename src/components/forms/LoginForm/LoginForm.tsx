@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LoginFormInputs, LoginFormProps, LoginFormSchema } from './LoginForm.types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Copyright } from '@/components/Copyright';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { IApiError } from '@/api/utils/api.types';
 import { AlertSnackbar } from '@/components/AlertSnackbar';
-import { executeRequest } from '@/api/utils';
+import { executeRequest, stringifyErrorMessage } from '@/api/utils';
 import { authService } from '@/api/services';
 
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const [error, setError] = useState<IApiError | null>(null);
-  const [showError, setShowError] = useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors,
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(LoginFormSchema),
   });
@@ -27,20 +24,22 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const submitHandler: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs) => {
     const { success, error } = await executeRequest(() => authService.login(data.email));
     if (success) {
-      onSubmit();
+      return onSubmit();
     }
 
-    setError(error);
-    setShowError(true);
+    setError('root', {
+      type: 'serverError',
+      message: stringifyErrorMessage(error),
+    });
   };
 
   return (
     <>
       <AlertSnackbar
-        isOpen={ showError }
+        isOpen={ !!errors.root }
         severity={ 'error' }
-        setIsOpen={ setShowError }
-        content={ error?.message }
+        setIsOpen={ () => clearErrors('root') }
+        content={ errors.root?.message }
         anchorOrigin={ {
           vertical: 'bottom',
           horizontal: 'center',
@@ -71,7 +70,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         >
           Отправить ссылку на почту
         </Button>
-        <Copyright />
       </Box>
     </>
   );

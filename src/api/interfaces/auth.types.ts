@@ -6,3 +6,14 @@ export interface IProfileData {
   avatar: string;
   role: USER_ROLE;
 }
+
+export type IRegisterData = IProfileData & {
+  token: string;
+}
+
+// DTOs
+
+export interface SignUpDto {
+  readonly username: string;
+  readonly email: string;
+}

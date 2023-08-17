@@ -5,16 +5,17 @@ import { useRouter } from 'next/router';
 import { Divider, Stack } from '@mui/material';
 import { ProfileInfo } from 'src/components/ProfileInfo';
 import { MyRecipes } from '@/components/MyRecipes';
-import { IRecipeShort } from '@/api/interfaces/recipes.types';
+import { IRecipePreview } from '@/api/interfaces/recipes.types';
 import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services/recipes.service';
 import { LogoutBtn } from '@/components/icon-buttons/LogoutBtn';
 import { USER_ROLE } from '@/utils/types';
 import Button from '@mui/material/Button';
+import { FavouriteRecipes } from '@/components/FavouriteRecipes';
 
 export default function Profile() {
   const user = useSelector((state: RootState) => state.user.payload);
-  const [recipes, setRecipes] = useState<IRecipeShort[]>([]);
+  const [recipes, setRecipes] = useState<IRecipePreview[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function Profile() {
     };
 
     if (!user) {
-      router.push('auth');
+      router.push('login');
     } else {
       loadRecipes();
     }
@@ -64,6 +65,7 @@ export default function Profile() {
         </Stack>
       </Stack>
       <MyRecipes recipes={ recipes } />
+      <FavouriteRecipes />
     </Stack>
   );
 }

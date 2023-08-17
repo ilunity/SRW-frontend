@@ -6,6 +6,7 @@ import { TimeLabel } from '@/components/labels';
 import { FavoritesLabel } from '@/components/labels/FavoritesLabel';
 import { IngredientsMenu } from '@/components/IngredientsMenu';
 import Link from 'next/link';
+import { CommentLabel } from '@/components/labels/CommentLabel';
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -18,7 +19,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
         width: 600,
       } }
     >
-      <Link href={ `/recipes/${ recipe.id }` }>
+      <Link href={ '/recipes/[recipeId]' } as={ `/recipes/${ recipe.id }` }>
         <CardMedia
           component='img'
           sx={ { width: 300 } }
@@ -34,7 +35,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
         } }
       >
         <Box>
-          <Link href={ `/recipes/${ recipe.id }` }>
+          <Link href={ '/recipes/[recipeId]' } as={ `/recipes/${ recipe.id }` }>
             <Typography variant='h6' component='h3' maxHeight={ 66 } overflow={ 'hidden' }>
               { recipe.title }
             </Typography>
@@ -51,6 +52,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           <RowContainer>
             <TimeLabel time={ recipe.time } />
             <FavoritesLabel count={ recipe.favourites } />
+            <CommentLabel value={ recipe.comments_number } />
           </RowContainer>
         </Box>
       </CardContent>

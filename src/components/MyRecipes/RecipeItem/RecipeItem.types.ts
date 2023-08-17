@@ -1,5 +1,6 @@
-import { IRecipeShort } from '@/api/interfaces/recipes.types';
+import { IRecipePreview } from '@/api/interfaces/recipes.types';
 
 export interface RecipeItemProps {
-  recipe: IRecipeShort;
+  recipe: IRecipePreview;
+  onDelete?: () => void;
 }
