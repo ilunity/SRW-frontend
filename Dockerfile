@@ -7,5 +7,12 @@ COPY . /usr/src/app
 COPY package*.json /usr/src/app/
 RUN npm ci
 EXPOSE ${PORT}
+
+ARG NEXT_PUBLIC_HOST
+ENV NEXT_PUBLIC_HOST ${NEXT_PUBLIC_HOST}
+
+ARG NEXT_PUBLIC_HOSTNAME
+ENV NEXT_PUBLIC_HOSTNAME ${NEXT_PUBLIC_HOSTNAME}
+
 RUN npm run build
 CMD ["npm", "start"]

@@ -24,6 +24,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          build-args: |
+            "NEXT_PUBLIC_HOSTNAME=${{ secrets.NEXT_PUBLIC_HOSTNAME }}"
+            "NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}"
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/foody-next:latest
