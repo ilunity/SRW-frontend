@@ -19,7 +19,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
         width: 600,
       } }
     >
-      <Link href={ `/recipes/${ recipe.id }` }>
+      <Link href={ '/recipes/[recipeId]' } as={ `/recipes/${ recipe.id }` }>
         <CardMedia
           component='img'
           sx={ { width: 300 } }
@@ -35,7 +35,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
         } }
       >
         <Box>
-          <Link href={ `/recipes/${ recipe.id }` }>
+          <Link href={ '/recipes/[recipeId]' } as={ `/recipes/${ recipe.id }` }>
             <Typography variant='h6' component='h3' maxHeight={ 66 } overflow={ 'hidden' }>
               { recipe.title }
             </Typography>
