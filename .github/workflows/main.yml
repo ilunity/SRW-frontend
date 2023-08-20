@@ -30,7 +30,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/foody-next:latest
-          secrets:
+          secrets: |
             NEXT_CLIENT_HOST=${{ secrets.NEXT_CLIENT_HOST }} 
             NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
 
@@ -48,4 +48,4 @@ jobs:
             echo NEXT_CLIENT_HOST=${{ secrets.NEXT_CLIENT_HOST }} >> .env
             docker rm -f foody-client
             docker pull ilunity/foody-next:latest
-            docker run -dit --name foody-client -p 3000:3000 ilunity/foody-next:latest
+            docker run -dit --name foody-client -p 3000:3000 ilunity/foody-next:latest --env-file /.env
