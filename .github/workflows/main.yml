@@ -25,14 +25,11 @@ jobs:
         with:
           context: .
           build-args: |
-            "NEXT_PUBLIC_HOSTNAME=${{ secrets.NEXT_PUBLIC_HOSTNAME }}"
+            "NEXT_CLIENT_HOST=${{ secrets.NEXT_CLIENT_HOST }}" 
             "NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}"
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/foody-next:latest
-          secrets: |
-            NEXT_CLIENT_HOST=${{ secrets.NEXT_CLIENT_HOST }} 
-            NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
 
       - name: Copy env variables and run docker on remote server
         uses: appleboy/ssh-action@v1.0.0
