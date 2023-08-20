@@ -45,4 +45,4 @@ jobs:
             echo NEXT_CLIENT_HOST=${{ secrets.NEXT_CLIENT_HOST }} >> .env
             docker rm -f foody-client
             docker pull ilunity/foody-next:latest
-            docker run -dit --name foody-client -p 3000:3000 ilunity/foody-next:latest --env-file /.env
+            docker run -dit --name foody-client -p 3000:3000 --env-file .env ilunity/foody-next:latest
