@@ -6,3 +6,4 @@ npm-debug.log
 README.md
 _next
 .git
+.env.local
