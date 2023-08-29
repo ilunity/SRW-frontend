@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { UploadImg } from 'src/components/forms/StepsForm/SetStepForm/UploadImg';
+import { UploadImg } from 'src/components/forms/UploadImg';
 
 export const SetStepForm: React.FC<SetStepFormProps> = ({ onSubmit, defaultValue }) => {
   const {

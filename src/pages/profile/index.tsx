@@ -10,8 +10,8 @@ import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services/recipes.service';
 import { LogoutBtn } from '@/components/icon-buttons/LogoutBtn';
 import { USER_ROLE } from '@/utils/types';
-import Button from '@mui/material/Button';
 import { FavouriteRecipes } from '@/components/FavouriteRecipes';
+import { LinkButton } from '@/components/LinkButton';
 
 export default function Profile() {
   const user = useSelector((state: RootState) => state.user.payload);
@@ -49,13 +49,9 @@ export default function Profile() {
         <Stack spacing={ 1 }>
           { user.role === USER_ROLE.ADMIN &&
             <>
-              <Button
-                variant={ 'outlined' }
-                color={ 'success' }
-                href={ '/recipes/moderate' }
-              >
-                Рецепты на модерации
-              </Button>
+              <LinkButton href={ '/dashboard' } color={ 'error' }>
+                Админ панель
+              </LinkButton>
               <Divider orientation={ 'horizontal' } />
             </>
           }

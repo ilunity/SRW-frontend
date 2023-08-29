@@ -10,7 +10,10 @@ export const Header: React.FC = () => {
   const user = useSelector((state: RootState) => state.user.payload);
 
   return (
-    <AppBar position='static' sx={ { mb: 6 } }>
+    <AppBar
+      position='fixed'
+      sx={ { zIndex: theme.zIndex.drawer + 1 } }
+    >
       <Container>
         <Toolbar disableGutters>
           <Typography
