@@ -5,6 +5,7 @@ import { CenterModal } from '@/components/layouts/CenterModal';
 import { UpdateProductForm } from '@/components/forms/ProductForm/UpdateProductForm';
 import { productsService } from '@/api/services';
 import { ProductFormInputs } from '@/components/forms/ProductForm/ProductForm.types';
+import { PartialBy } from '@/utils';
 
 export const UpdateProductModal: React.FC<UpdateProductModalProps> = (
   {
@@ -18,7 +19,7 @@ export const UpdateProductModal: React.FC<UpdateProductModalProps> = (
     submitHandler,
   } = useErrorAlertController({
     closeModal: onClose,
-    requestFn: (data: ProductFormInputs) => () => productsService.update({ id: product.id, ...data }),
+    requestFn: (data: PartialBy<ProductFormInputs, 'img'>) => () => productsService.update({ id: product.id, ...data }),
     onSuccess,
   });
 
