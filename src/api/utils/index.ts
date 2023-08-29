@@ -3,3 +3,4 @@ export * from './define-axios-error';
 export * from './use-request';
 export * from './execute-request';
 export * from './stringify-error-message';
+export * from './header-constructor';

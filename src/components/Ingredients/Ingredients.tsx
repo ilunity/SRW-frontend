@@ -44,7 +44,7 @@ export const Ingredients: React.FC<IngredientsProps> = ({ recipeProducts }) => {
                   } }
                 >
                   <Avatar
-                    alt={ `Картинка для продукта ${ recipeProduct.product.name }` }
+                    alt={ `Картинка ${ recipeProduct.product.name }` }
                     src={ HOST + recipeProduct.product.img }
                     variant={ 'rounded' }
                     sx={ {
