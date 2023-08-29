@@ -20,3 +20,15 @@ export interface IFiltersData {
   name: string;
   children: IFiltersData[];
 }
+
+// DTOs
+
+export interface CreateFilterDto {
+  readonly parent_id?: number;
+  readonly name: string;
+}
+
+export interface UpdateFilterDto {
+  readonly id: number;
+  readonly name: string;
+}

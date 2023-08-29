@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Toolbar } from '@mui/material';
 import { LayoutProps } from '@/components/Layout/Layout.types';
 import { Header } from '@/components/Header';
 import React from 'react';
@@ -24,6 +24,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         } }
       >
         <Header />
+        <Toolbar sx={ { mb: 6 } } />
         <Container
           component={ 'main' }
           sx={ { flex: '1 0 auto' } }

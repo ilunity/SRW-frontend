@@ -4,7 +4,7 @@ import { IRecipeStep } from '@/utils/types/recipeStep';
 import { IFiltersData } from '@/api/interfaces/filters.types';
 
 export enum RECIPE_STATUS {
-  CREATION = 'CREATION',
+  CREATED = 'CREATED',
   MODERATION = 'MODERATION',
   SHARED = 'SHARED',
 }

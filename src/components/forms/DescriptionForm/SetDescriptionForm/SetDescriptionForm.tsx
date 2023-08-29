@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormHelperText, Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { UploadImg } from 'src/components/forms/StepsForm/SetStepForm/UploadImg';
+import { UploadImg } from 'src/components/forms/UploadImg';
 import Button from '@mui/material/Button';
 import { PaperWrapper } from '@/components/layouts/PaperWrapper';
 
