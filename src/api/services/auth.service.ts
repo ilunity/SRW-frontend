@@ -2,7 +2,7 @@ import { axiosInstance } from '@/api/utils/axios-instance';
 import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { IProfileData, IRegisterData, SignUpDto } from '@/api/interfaces/auth.types';
 
-const url = axiosInstance.defaults.baseURL + 'auth/';
+const url = 'auth/';
 
 class AuthService {
   public login(email: string): ApiRequestFnResponse<void> {

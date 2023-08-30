@@ -3,7 +3,7 @@ import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { IFavouriteRecipe, IRating } from '@/api/interfaces/user.types';
 import { HeadersConstructor } from '@/api/utils';
 
-const url = axiosInstance.defaults.baseURL + 'user/';
+const url = 'user/';
 
 class UserService {
   public addFavouriteRecipe(recipeId: number): ApiRequestFnResponse<IFavouriteRecipe> {

@@ -2,7 +2,7 @@ import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { axiosInstance, HeadersConstructor } from '@/api/utils';
 import { CreateProductDto, IProductData, UpdateProductDto } from '@/api/interfaces/products.types';
 
-const url = axiosInstance.defaults.baseURL + 'product/';
+const url = 'product/';
 
 class ProductsService {
   get(): ApiRequestFnResponse<IProductData[]> {

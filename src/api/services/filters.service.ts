@@ -2,7 +2,7 @@ import { axiosInstance, HeadersConstructor } from '@/api/utils';
 import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { CreateFilterDto, GetOneParams, IFiltersData, UpdateFilterDto } from '@/api/interfaces/filters.types';
 
-const url = axiosInstance.defaults.baseURL + 'filter/';
+const url = 'filter/';
 
 class FiltersService {
   create(createFilterDto: CreateFilterDto): ApiRequestFnResponse<IFiltersData> {

@@ -10,7 +10,7 @@ import {
 } from '@/api/interfaces/recipes.types';
 import { FiltersKeys } from '@/api/interfaces/filters.types';
 
-const url = axiosInstance.defaults.baseURL + 'recipe/';
+const url = 'recipe/';
 
 class RecipesService {
   create(recipe: CreateRecipeDto) {
