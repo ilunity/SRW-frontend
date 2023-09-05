@@ -16,15 +16,21 @@ export const CreateProductModal: React.FC<CreateProductModalProps> = (
     errorAlertState,
     submitHandler,
   } = useErrorAlertController({
-    closeModal: onClose,
     requestFn: (data: ProductFormInputs) => () => productsService.create(data),
-    onSuccess,
+    onSuccess: () => {
+      onSuccess();
+      onClose();
+    },
   });
 
   return (
     <>
       <ErrorAlert errorAlertState={ errorAlertState } />
-      <CenterModal open={ open } onClose={ onClose }>
+      <CenterModal
+        open={ open }
+        onClose={ onClose }
+        title={ 'Добавить продукт' }
+      >
         <CreateProductForm onSubmit={ submitHandler } />
       </CenterModal>
     </>

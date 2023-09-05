@@ -12,7 +12,7 @@ export const RatingButton: React.FC<RatingButtonProps> = ({ recipeId }) => {
 
   const { data: rating } = useApiRequest(
     async () => await userService.getRating(recipeId),
-    [updateButtonCounter],
+    { deps: [updateButtonCounter] },
   );
 
   const handleUpdateRating = async (score: number | null) => {

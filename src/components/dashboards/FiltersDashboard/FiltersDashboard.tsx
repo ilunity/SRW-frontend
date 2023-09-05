@@ -10,7 +10,7 @@ export const FiltersDashboard: React.FC = () => {
   const [updateFiltersCounter, setUpdateFiltersCounter] = useState<number>(0);
   const [openCreateFilterForm, setOpenCreateFilterForm] = useState<boolean>(false);
 
-  const { data: filters } = useApiRequest(filtersService.get, [updateFiltersCounter]);
+  const { data: filters } = useApiRequest(filtersService.get, { deps: [updateFiltersCounter] });
 
   const updateFilters = () => setUpdateFiltersCounter(prevState => prevState + 1);
 
@@ -23,12 +23,7 @@ export const FiltersDashboard: React.FC = () => {
       />
       <Stack spacing={ 8 }>
         { filters &&
-          <Card
-            sx={ {
-              borderRadius: 3,
-              width: 850,
-            } }
-          >
+          <Card sx={ { borderRadius: 3 } }>
             <CardHeader
               title={ `Фильтры:` }
               action={

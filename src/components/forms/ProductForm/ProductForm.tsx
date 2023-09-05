@@ -1,7 +1,6 @@
 import React from 'react';
 import { ProductFormInputs, ProductFormProps } from './ProductForm.types';
-import { PaperWrapper } from '@/components/layouts/PaperWrapper';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { UploadImg } from '@/components/forms/UploadImg';
 import Button from '@mui/material/Button';
@@ -11,7 +10,6 @@ import { defineResolver } from '@/components/forms/ProductForm/ProductForm.resol
 export const ProductForm: React.FC<ProductFormProps> = (
   {
     isImgRequired,
-    title,
     onSubmit,
     defaultName,
   }) => {
@@ -29,34 +27,26 @@ export const ProductForm: React.FC<ProductFormProps> = (
   const isImgLoaded = !!watch('img');
 
   return (
-    <PaperWrapper>
-      <Stack
-        component={ 'form' }
-        spacing={ 2 }
-        sx={ {
-          width: 500,
-        } }
-        onSubmit={ handleSubmit(onSubmit) }
-      >
-        <Typography>
-          { title }
-        </Typography>
-        <TextField
-          { ...register('name') }
-          autoFocus
-          error={ !!errors.name }
-          label={ 'Название' }
-        />
-        <UploadImg
-          control={ control }
-          isLoaded={ isImgLoaded }
-          fieldName={ 'img' }
-          acceptableFiles={ ['.svg', '.png'] }
-        />
-        <Button variant={ 'contained' } type={ 'submit' }>
-          Сохранить
-        </Button>
-      </Stack>
-    </PaperWrapper>
+    <Stack
+      component={ 'form' }
+      spacing={ 2 }
+      onSubmit={ handleSubmit(onSubmit) }
+    >
+      <TextField
+        { ...register('name') }
+        autoFocus
+        error={ !!errors.name }
+        label={ 'Название' }
+      />
+      <UploadImg
+        control={ control }
+        isLoaded={ isImgLoaded }
+        fieldName={ 'img' }
+        acceptableFiles={ ['.svg', '.png'] }
+      />
+      <Button variant={ 'contained' } type={ 'submit' }>
+        Сохранить
+      </Button>
+    </Stack>
   );
 };

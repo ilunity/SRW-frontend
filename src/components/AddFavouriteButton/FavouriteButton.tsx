@@ -15,7 +15,7 @@ export const FavouriteButton: React.FC<FavouriteButtonProps> = ({ recipeId }) =>
 
   const { data: favouriteRecipe, status } = useApiRequest(
     async () => await userService.getFavouriteRecipe(recipeId),
-    [updateButtonCounter],
+    { deps: [updateButtonCounter] },
   );
 
   const handleAddFavourite = async () => {

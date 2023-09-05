@@ -43,8 +43,8 @@ export interface IRecipeData {
   time: number;
   servings_number: number;
   status: RECIPE_STATUS;
-  avg_rating: number | null;
-  favourites: number;
+  avg_rating: string | null;
+  favourites: string;
   user: IUser;
   comments: RecipeComment[],
   steps: IRecipeStep[];
@@ -53,7 +53,7 @@ export interface IRecipeData {
 }
 
 export type IRecipePreview = Omit<IRecipeData, 'steps' | 'filters'> & {
-  readonly comments_number: number;
+  readonly comments_number: string;
 }
 
 export interface IRecipesIds {

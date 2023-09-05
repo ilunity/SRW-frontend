@@ -14,7 +14,12 @@ interface IRequestState<T> {
   status: IStatusState;
 }
 
-export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>, deps: DependencyList = []): IRequestState<DataType> => {
+interface ApiRequestOptions {
+  deps?: DependencyList;
+  condition?: boolean;
+}
+
+export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>, { deps = [], condition = true }: ApiRequestOptions): IRequestState<DataType> => {
   const [state, setState] = useState<IRequestState<DataType>>({
     status: 'loading',
     error: null,
@@ -43,7 +48,9 @@ export const useApiRequest = <DataType>(requestFn: ApiRequestFn<DataType>, deps:
   };
 
   useEffect(() => {
-    request();
+    if (condition) {
+      request();
+    }
   }, deps);
 
   return state;

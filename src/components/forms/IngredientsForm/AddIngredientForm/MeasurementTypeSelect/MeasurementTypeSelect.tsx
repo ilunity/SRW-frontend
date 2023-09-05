@@ -15,7 +15,7 @@ export const MeasurementTypeSelect: React.FC<MeasurementTypeSelectProps> = ({ co
   });
 
   return (
-    <FormControl sx={ { m: 1, width: 300 } }>
+    <FormControl>
       <InputLabel error={ !!errors.measurement_type }>Единицы измерения</InputLabel>
       <Select
         value={ value }

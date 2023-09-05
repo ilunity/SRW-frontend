@@ -1,15 +1,14 @@
 import React from 'react';
 import { CommentLabelProps } from './CommentLabel.types';
 import CommentIcon from '@mui/icons-material/Comment';
-import { Stack, Typography } from '@mui/material';
+import { LabelLayout } from '@/components/labels/LabelLayout';
 
-export const CommentLabel: React.FC<CommentLabelProps> = ({ value }) => {
+export const CommentLabel: React.FC<CommentLabelProps> = ({ value, size }) => {
   return (
-    <Stack direction={ 'row' } spacing={ 1 }>
-      <CommentIcon />
-      <Typography>
-        { value }
-      </Typography>
-    </Stack>
+    <LabelLayout
+      text={ `${ value }` }
+      icon={ <CommentIcon /> }
+      size={ size }
+    />
   );
 };

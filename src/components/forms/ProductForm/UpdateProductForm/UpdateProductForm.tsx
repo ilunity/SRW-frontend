@@ -10,7 +10,6 @@ export const UpdateProductForm: React.FC<UpdateProductFormProps> = (
   return (
     <ProductForm
       isImgRequired={ false }
-      title={ `${ productName }. Обновить продукт.` }
       onSubmit={ onSubmit }
       defaultName={ productName }
     />

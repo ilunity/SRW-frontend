@@ -27,6 +27,7 @@ export const RecipeStep: React.FC<RecipeStepProps> = ({ step, index }) => {
       <CenterModal
         open={ openEditStepModal }
         onClose={ () => setOpenEditStepModal(false) }
+        title={ 'Изменить шаг' }
       >
         <SetStepForm onSubmit={ handleEditStep } defaultValue={ step } />
       </CenterModal>
@@ -52,7 +53,10 @@ export const RecipeStep: React.FC<RecipeStepProps> = ({ step, index }) => {
               alt={ 'Фотография шага инструкции' }
               sx={ {
                 float: 'left',
-                width: 400,
+                width: {
+                  xs: '100%',
+                  sm: '60%',
+                },
                 height: 250,
                 borderRadius: 2,
                 mr: 2,

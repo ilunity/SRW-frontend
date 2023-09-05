@@ -16,7 +16,6 @@ export const Search: React.FC<SearchProps> = ({ ...inputBaseProps }) => {
           backgroundColor: theme => alpha(theme.palette.common.white, 0.25),
         },
         borderRadius: theme => theme.shape.borderRadius,
-        ml: 1,
         width: 'auto',
         position: 'relative',
         display: 'flex',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CommentProps } from './Comment.types';
-import { Card, CardContent, CardHeader, Divider, Stack, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Stack, Typography } from '@mui/material';
 import { UserInfo } from '@/components/UserInfo';
 import { format } from 'date-fns';
 
@@ -13,14 +13,12 @@ export const Comment: React.FC<CommentProps> = ({ comment }) => {
       } }
     >
       <CardHeader
-        sx={ {
-          pb: 0,
-        } }
+        sx={ { pb: 0 } }
         title={
           <Stack
             direction={ 'row' }
-            divider={ <Divider orientation={ 'vertical' } flexItem /> }
             spacing={ 2 }
+            justifyContent={ 'space-between' }
             alignItems={ 'center' }
           >
             <UserInfo user={ comment.user } tooltip={ comment.user.username } size={ 'small' } />

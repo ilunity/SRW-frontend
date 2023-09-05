@@ -8,7 +8,7 @@ export const Copyright: React.FC = () => {
     <Typography variant='body2' color='text.secondary' align='center'>
       { 'Copyright © ' }
       <Link color='inherit' href={ HOST }>
-        Food Recipe
+        Food Recipes
       </Link>
       { ` ${ new Date().getFullYear() }.` }
     </Typography>

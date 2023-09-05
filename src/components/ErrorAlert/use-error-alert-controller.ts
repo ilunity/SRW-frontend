@@ -5,8 +5,7 @@ import { ErrorAlertState } from '@/components/ErrorAlert/ErrorAlert.types';
 
 export interface IErrorAlertController<DataType> {
   requestFn: (data: DataType) => ApiRequestFn<any>;
-  closeModal: () => void;
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export interface ErrorAlertControllerReturn<DataType> {
@@ -14,7 +13,7 @@ export interface ErrorAlertControllerReturn<DataType> {
   submitHandler: (data: DataType) => void;
 }
 
-export const useErrorAlertController = <DataType>({ requestFn, closeModal, onSuccess }: IErrorAlertController<DataType>): ErrorAlertControllerReturn<DataType> => {
+export const useErrorAlertController = <DataType>({ requestFn, onSuccess }: IErrorAlertController<DataType>): ErrorAlertControllerReturn<DataType> => {
   const [requestError, setRequestError] = useState<IApiError | null>(null);
 
   const submitHandler = async (data: DataType) => {
@@ -22,8 +21,9 @@ export const useErrorAlertController = <DataType>({ requestFn, closeModal, onSuc
 
     setRequestError(error);
     if (success) {
-      onSuccess();
-      closeModal();
+      if (onSuccess) {
+        onSuccess();
+      }
     }
   };
 

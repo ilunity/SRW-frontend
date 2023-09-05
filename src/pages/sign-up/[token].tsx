@@ -1,15 +1,15 @@
 import { authService } from '@/api/services';
 import { GetServerSideProps } from 'next';
 import { executeRequest } from '@/api/utils';
-import { getEmptyLayout } from '@/utils/layouts';
 import { TokenAuthPage } from 'src/components/TokenAuthPage';
 import { TokenAuthPageProps } from '@/components/TokenAuthPage/Auth.types';
+import { LayoutConstructor } from '@/utils/layout-constructor';
 
 export default function SignUp(authProps: TokenAuthPageProps) {
   return (<TokenAuthPage { ...authProps } />);
 }
 
-SignUp.getLayout = getEmptyLayout;
+SignUp.layout = new LayoutConstructor().empty();
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const signUpToken = context.query.token as string;
