@@ -7,7 +7,6 @@ export const FilterFormSchema = yup.object({
 export type FilterFormInputs = yup.InferType<typeof FilterFormSchema>;
 
 export interface FilterFormProps {
-  title: string;
   onSubmit: (data: FilterFormInputs) => void;
   defaultName?: string;
 }

@@ -18,15 +18,21 @@ export const UpdateProductModal: React.FC<UpdateProductModalProps> = (
     errorAlertState,
     submitHandler,
   } = useErrorAlertController({
-    closeModal: onClose,
     requestFn: (data: PartialBy<ProductFormInputs, 'img'>) => () => productsService.update({ id: product.id, ...data }),
-    onSuccess,
+    onSuccess: () => {
+      onSuccess();
+      onClose();
+    },
   });
 
   return (
     <>
       <ErrorAlert errorAlertState={ errorAlertState } />
-      <CenterModal open={ open } onClose={ onClose }>
+      <CenterModal
+        open={ open }
+        onClose={ onClose }
+        title={ `${ product.name }. Обновить продукт.` }
+      >
         <UpdateProductForm onSubmit={ submitHandler } productName={ product.name } />
       </CenterModal>
     </>

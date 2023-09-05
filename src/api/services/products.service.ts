@@ -10,7 +10,7 @@ class ProductsService {
   }
 
   create(createProductDto: CreateProductDto): ApiRequestFnResponse<IProductData> {
-    return axiosInstance.post(url, createProductDto,{
+    return axiosInstance.post(url, createProductDto, {
       headers: new HeadersConstructor().authorization(),
     });
   }

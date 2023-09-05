@@ -30,7 +30,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({ variant }) => {
       <Box
         sx={ {
           paddingTop: 10,
-          width: 480,
+          width: {
+            xs: '100%',
+            sm: 480,
+          },
           mx: 'auto',
           display: 'flex',
           flexDirection: 'column',
@@ -48,7 +51,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({ variant }) => {
           : <SignUpForm onSubmit={ () => setShowSuccess(true) } />
         }
         <Stack
-          direction={ 'row' }
+          direction={ {
+            xs: 'column',
+            sm: 'row',
+          } }
+          spacing={ 2 }
           sx={ {
             justifyContent: 'space-between',
             alignItems: 'center',

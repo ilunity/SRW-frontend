@@ -14,7 +14,7 @@ export interface Step {
 
 export interface Description {
   title: string;
-  description: string ;
+  description: string;
   img: string;
   time: number;
   servings_number: number;

@@ -1,5 +1,5 @@
-import { IRecipePreview } from '@/api/interfaces/recipes.types';
+import { IProfileData } from '@/api/interfaces/auth.types';
 
 export interface MyRecipesProps {
-  recipes: IRecipePreview[];
+  user: IProfileData;
 }

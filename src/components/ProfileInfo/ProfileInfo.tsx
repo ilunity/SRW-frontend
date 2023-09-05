@@ -12,13 +12,24 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({ user }) => {
       direction={ 'row' }
       spacing={ 2 }
       divider={ <Divider orientation='vertical' flexItem /> }
+      sx={ {
+        alignItems: 'center',
+      } }
     >
       <Avatar
         alt={ `Аватар пользователя ${ user.username }` }
         src={ HOST + user.avatar }
         sx={ {
-          width: 120,
-          height: 120,
+          width: {
+            xs: 60,
+            sm: 90,
+            lg: 120,
+          },
+          height: {
+            xs: 60,
+            sm: 90,
+            lg: 120,
+          },
         } }
       />
       <Stack

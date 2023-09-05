@@ -47,18 +47,14 @@ export const IngredientsForm: React.FC = () => {
       <CenterModal
         open={ openAddIngredientModal }
         onClose={ () => setOpenAddIngredientModal(false) }
+        title={ 'Добавить ингредиент' }
       >
         <AddIngredientForm
           products={ products }
           onSubmit={ handleAddIngredient }
         />
       </CenterModal>
-      <Card
-        sx={ {
-          borderRadius: 3,
-          width: 300,
-        } }
-      >
+      <Card sx={ { borderRadius: 3 } }>
         <CardHeader
           title={ 'Ингредиенты:' }
           action={ <AddBtn title={ 'Добавить ингредиент' } onClick={ () => setOpenAddIngredientModal(true) } /> }

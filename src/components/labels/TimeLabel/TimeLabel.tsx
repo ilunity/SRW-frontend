@@ -1,15 +1,14 @@
 import React from 'react';
 import { TimeLabelProps } from './TimeLabel.types';
-import { Stack, Typography } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { LabelLayout } from '@/components/labels/LabelLayout';
 
-export const TimeLabel: React.FC<TimeLabelProps> = ({ time }) => {
+export const TimeLabel: React.FC<TimeLabelProps> = ({ time, size }) => {
   return (
-    <Stack direction={ 'row' } spacing={ 1 }>
-      <AccessTimeIcon />
-      <Typography>
-        { time } мин.
-      </Typography>
-    </Stack>
+    <LabelLayout
+      text={ `${ time } мин.` }
+      icon={ <AccessTimeIcon /> }
+      size={ size }
+    />
   );
 };

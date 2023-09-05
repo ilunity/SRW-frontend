@@ -7,7 +7,7 @@ import { DashboardAccordionFilter } from '@/components/dashboards/FiltersDashboa
 export const DashboardFilter: React.FC<DashboardFilterProps> = ({ filter, updateFilters }) => {
   if (filter.children.length > 0) {
     return (
-      <DashboardAccordionFilter filter={ filter } updateProducts={ updateFilters }/>
+      <DashboardAccordionFilter filter={ filter } updateProducts={ updateFilters } />
     );
   }
 

@@ -16,12 +16,7 @@ export const FiltersForm: React.FC<FiltersFormProps> = ({ filters }) => {
   };
 
   return (
-    <Card
-      sx={ {
-        borderRadius: 3,
-        width: 300,
-      } }
-    >
+    <Card sx={ { borderRadius: 3 } }>
       <CardHeader
         title={ 'Категории:' }
         action={ <ReloadBtn title={ 'Сбросить фильтры' } onClick={ reloadFilters } /> }

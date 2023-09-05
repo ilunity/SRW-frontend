@@ -8,17 +8,27 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const RecipeHeading: React.FC<RecipeHeadingProps> = ({ recipe }) => {
   return (
-    <Card sx={ { borderRadius: 3 } }>
+    <Card sx={ { borderRadius: 3, width: '100%' } }>
       <CardHeader
         title={
           <Stack
-            direction={ 'row' }
+            direction={ {
+              xs: 'column',
+              sm: 'row',
+            } }
             sx={ {
               justifyContent: 'space-between',
-              alignItems: 'center',
+              alignItems: {
+                xs: 'flex-start',
+                sm: 'center',
+              },
             } }
           >
-            <Typography variant={ 'h4' } component={ 'h1' }>
+            <Typography
+              variant={ 'h4' }
+              component={ 'h1' }
+              sx={ { mr: 2 } }
+            >
               { recipe.title }
             </Typography>
             <UserInfo
@@ -34,12 +44,17 @@ export const RecipeHeading: React.FC<RecipeHeadingProps> = ({ recipe }) => {
           src={ HOST + recipe.img }
           alt={ 'Фотография приготовленного блюда' }
           sx={ {
-            mb: 4,
+            mx: 'auto',
+            mb: 2,
             borderRadius: 2,
             height: {
               xs: 200,
               sm: 300,
               md: 350,
+            },
+            maxWidth: {
+              xs: 400,
+              sm: 600,
             },
           } }
         />

@@ -12,7 +12,6 @@ export const Header: React.FC = () => {
   return (
     <AppBar
       position='fixed'
-      sx={ { zIndex: theme.zIndex.drawer + 1 } }
     >
       <Container>
         <Toolbar disableGutters>

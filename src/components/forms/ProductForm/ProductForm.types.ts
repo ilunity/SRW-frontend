@@ -6,7 +6,6 @@ export interface ProductFormInputs {
 }
 
 export type ProductFormProps = {
-  title: string;
   defaultName?: string;
 } & ({
   isImgRequired: true;

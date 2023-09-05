@@ -1,16 +1,15 @@
 import React from 'react';
 import { FavoritesLabelProps } from './FavoritesLabel.types';
-import { Stack, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { LabelLayout } from '@/components/labels/LabelLayout';
 import { red } from '@mui/material/colors';
 
-export const FavoritesLabel: React.FC<FavoritesLabelProps> = ({ count }) => {
+export const FavoritesLabel: React.FC<FavoritesLabelProps> = ({ count, size }) => {
   return (
-    <Stack direction={ 'row' } spacing={ 1 }>
-      <FavoriteIcon sx={ { color: red['500'] } } />
-      <Typography>
-        { count }
-      </Typography>
-    </Stack>
+    <LabelLayout
+      text={ `${ count }` }
+      icon={ <FavoriteIcon sx={ { color: red['500'] } } /> }
+      size={ size }
+    />
   );
 };

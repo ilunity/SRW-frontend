@@ -6,7 +6,6 @@ export const CreateProductForm: React.FC<CreateProductFormProps> = ({ onSubmit }
   return (
     <ProductForm
       isImgRequired={ true }
-      title={ 'Создать новый продукт' }
       onSubmit={ onSubmit }
     />
   );

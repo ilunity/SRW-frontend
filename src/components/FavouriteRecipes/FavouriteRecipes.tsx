@@ -1,40 +1,26 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
-import { RecipeItem } from '@/components/MyRecipes/RecipeItem';
-import { executeRequest, stringifyErrorMessage, useApiRequest } from '@/api/utils';
+import { RecipeItem } from 'src/components/RecipeItem';
+import { useApiRequest } from '@/api/utils';
 import { recipesService, userService } from '@/api/services';
-import { AlertSnackbar } from '@/components/AlertSnackbar';
-import { IApiError } from '@/api/utils/api.types';
+import { ErrorAlert, useErrorAlertController } from '@/components/ErrorAlert';
 
 export const FavouriteRecipes: React.FC = () => {
   const [updateButtonCounter, setUpdateButtonCounter] = useState<number>(0);
-  const [error, setError] = useState<IApiError | null>(null);
+  const { data: favouriteRecipes } = useApiRequest(recipesService.getAllFavouriteRecipes, { deps: [updateButtonCounter] });
 
-  const { data: favouriteRecipes } = useApiRequest(recipesService.getAllFavouriteRecipes, [updateButtonCounter]);
-
-  const handleRemoveFavourite = async (recipeId: number) => {
-    const { error } = await executeRequest(() => userService.deleteFavouriteRecipe(recipeId));
-
-    if (error) {
-      return setError(error);
-    }
-
-    setUpdateButtonCounter(prevState => prevState + 1);
-  };
+  const {
+    errorAlertState,
+    submitHandler: deleteFavouriteRecipeHandler,
+  } = useErrorAlertController({
+    requestFn: (recipeId: number) =>
+      () => userService.deleteFavouriteRecipe(recipeId),
+    onSuccess: () => setUpdateButtonCounter(prevState => prevState + 1),
+  });
 
   return (
     <>
-      <AlertSnackbar
-        isOpen={ error !== null }
-        severity={ 'error' }
-        setIsOpen={ () => setError(null) }
-        content={ error ? stringifyErrorMessage(error) : '' }
-        anchorOrigin={ {
-          vertical: 'bottom',
-          horizontal: 'center',
-        } }
-        autoHideDuration={ 3000 }
-      />
+      <ErrorAlert errorAlertState={ errorAlertState } />
       { favouriteRecipes &&
         <Card sx={ { borderRadius: 4 } }>
           <CardHeader title={ 'Избранные:' } />
@@ -44,7 +30,7 @@ export const FavouriteRecipes: React.FC = () => {
                 <RecipeItem
                   key={ recipe.id }
                   recipe={ recipe }
-                  onDelete={ () => handleRemoveFavourite(recipe.id) }
+                  onDelete={ deleteFavouriteRecipeHandler }
                 />
               )) }
             </Stack>
