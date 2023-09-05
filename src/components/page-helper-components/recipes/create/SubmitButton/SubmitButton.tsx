@@ -1,5 +1,4 @@
 import React from 'react';
-import { SubmitButtonProps } from './SubmitButton.types';
 import Button from '@mui/material/Button';
 import { clearCreatedRecipe, clearFilters, CreatedRecipeState } from '@/redux/slices';
 import { CreateRecipeDto } from '@/api/interfaces/recipes.types';
@@ -8,7 +7,7 @@ import { recipesService } from '@/api/services';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 
-export const SubmitButton: React.FC<SubmitButtonProps> = () => {
+export const SubmitButton: React.FC = () => {
   const createdRecipe = useSelector((state: RootState) => state.createdRecipe);
   const selectedFilters = useSelector((state: RootState) => state.selectedFilters);
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { Stack, useMediaQuery } from '@mui/material';
+import { Stack } from '@mui/material';
 import { RecipeSteps } from '@/components/RecipeSteps';
 import { IRecipeData } from '@/utils/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -7,18 +7,18 @@ import { RecipeHeading } from '@/components/RecipeHeading';
 import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services';
 import { PageContainer } from '@/components/PageContainer';
-import { Theme } from '@mui/system';
 import { CommentsBlock } from '@/components/CommentsBlock';
 import { RatePanel } from '@/components/RatePanel';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { ResponsiveRecipeIngredients } from 'src/components/page-helper-components/recipes/id/ResponsiveRecipeIngredients';
+import {
+  ResponsiveRecipeIngredients,
+} from 'src/components/page-helper-components/recipes/id/ResponsiveRecipeIngredients';
 
 export default function Recipe({ recipe }: {
   recipe: IRecipeData
 }) {
   const user = useSelector((state: RootState) => state.user.payload);
-  const mediaQueryMd: boolean = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
 
   return (
     <PageContainer>

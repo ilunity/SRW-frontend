@@ -1,9 +1,8 @@
 import React from 'react';
-import { FooterProps } from './Footer.types';
 import { Box } from '@mui/material';
 import { Copyright } from '@/components/Copyright';
 
-export const Footer: React.FC<FooterProps> = () => {
+export const Footer: React.FC = () => {
   return (
     <Box
       sx={ {
