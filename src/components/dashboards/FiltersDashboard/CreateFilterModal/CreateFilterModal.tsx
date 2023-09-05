@@ -19,18 +19,21 @@ export const CreateFilterModal: React.FC<CreateFilterModalProps> = (
   } = useErrorAlertController({
     requestFn: (data: FilterFormInputs) =>
       () => filtersService.create({ parent_id: parent?.id, ...data }),
-    closeModal: onClose,
-    onSuccess,
+    onSuccess: () => {
+      onSuccess();
+      onClose();
+    },
   });
 
   return (
     <>
       <ErrorAlert errorAlertState={ errorAlertState } />
-      <CenterModal open={ open } onClose={ onClose }>
-        <FilterForm
-          title={ parent ? `${ parent.name }. Добавить дочерний фильтр.` : 'Создать новый фильтр' }
-          onSubmit={ submitHandler }
-        />
+      <CenterModal
+        open={ open }
+        onClose={ onClose }
+        title={ parent ? `${ parent.name }. Добавить дочерний фильтр.` : 'Создать новый фильтр' }
+      >
+        <FilterForm onSubmit={ submitHandler } />
       </CenterModal>
     </>
   );

@@ -16,7 +16,7 @@ export const TokenAuthPage: React.FC<TokenAuthPageProps> = ({ token, userData, e
       } }
     >
       { userData &&
-        <Box sx={ { width: 600 } }>
+        <Box sx={ { width: '100%' } }>
           <Typography
             variant={ 'h4' }
             mb={ 2 }
@@ -30,7 +30,8 @@ export const TokenAuthPage: React.FC<TokenAuthPageProps> = ({ token, userData, e
         <Paper
           elevation={ 5 }
           sx={ {
-            minWidth: 600,
+            width: '100%',
+            maxWidth: 600,
             minHeight: 200,
             p: 4,
           } }

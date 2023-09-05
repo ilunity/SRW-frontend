@@ -1,8 +1,6 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, useMediaQuery } from '@mui/material';
 import { GetServerSideProps } from 'next';
 import { IRecipePreview } from '@/utils/types';
-import { RecipeCard } from '@/components/RecipeCard';
-import { FiltersForm } from 'src/components/forms/FiltersForm';
 import { executeRequest } from '@/api/utils';
 import { filtersService, recipesService } from '@/api/services';
 import { FiltersKeys, IFiltersData } from '@/api/interfaces/filters.types';
@@ -12,8 +10,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useDebounce } from 'use-debounce';
 import { useEffect } from 'react';
+import { FiltersForm } from '@/components/forms/FiltersForm';
+import { RecipesGrid } from '@/components/RecipesGrid';
+import { FiltersDrawer } from 'src/components/drawers/FiltersDrawer';
+import { Theme } from '@mui/system';
 
 const FILTERS_DEBOUNCE_DELAY = 2000;
+
 
 export default function Recipes({ recipes, filters }: {
   recipes: IRecipePreview[],
@@ -23,6 +26,8 @@ export default function Recipes({ recipes, filters }: {
 
   const selectedFilters = useSelector((state: RootState) => state.selectedFilters);
   const [selectedFiltersDebounced] = useDebounce(selectedFilters, FILTERS_DEBOUNCE_DELAY);
+
+  const mediaQueryLg: boolean = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   useEffect(() => {
     if (selectedFiltersDebounced.length === 0) {
@@ -44,18 +49,30 @@ export default function Recipes({ recipes, filters }: {
       <Stack spacing={ 4 }>
         <Stack
           direction={ 'row' }
-          spacing={ 8 }
-          sx={ { alignItems: 'start' } }
+          spacing={ {
+            xs: 0,
+            lg: 8,
+          } }
+          sx={ {
+            alignItems: {
+              xs: 'center',
+              lg: 'start',
+            },
+          } }
         >
-          <Stack spacing={ 2 }>
-            <FiltersForm filters={ filters } />
-          </Stack>
-          <Stack spacing={ 2 }>
-            { recipes.length === 0
-              ? (<Typography>Рецептов не найдено</Typography>)
-              : recipes.map(recipe => <RecipeCard key={ recipe.id } recipe={ recipe } />)
-            }
-          </Stack>
+          { mediaQueryLg ?
+            <Stack
+              spacing={ 2 }
+              sx={ {
+                width: 350,
+                flexShrink: 0,
+              } }
+            >
+              <FiltersForm filters={ filters } />
+            </Stack>
+            : <FiltersDrawer filters={ filters } />
+          }
+          <RecipesGrid recipes={ recipes } />
         </Stack>
       </Stack>
     </Box>

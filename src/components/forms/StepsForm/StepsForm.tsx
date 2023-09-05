@@ -24,15 +24,11 @@ export const StepsForm: React.FC = () => {
       <CenterModal
         open={ openAddStepModal }
         onClose={ () => setOpenAddStepModal(false) }
+        title={ 'Добавить шаг' }
       >
         <SetStepForm onSubmit={ handleAddStep } />
       </CenterModal>
-      <Card
-        sx={ {
-          borderRadius: 3,
-          width: 850,
-        } }
-      >
+      <Card sx={ { borderRadius: 3 } }>
         <CardHeader
           title={ 'Инструкция:' }
           action={ <AddBtn title={ 'Добавить элемент инструкции' } onClick={ () => setOpenAddStepModal(true) } /> }

@@ -49,6 +49,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       <Box
         component='form'
         onSubmit={ handleSubmit(submitHandler) }
+        width={ '100%' }
       >
         <TextField
           { ...register('email') }

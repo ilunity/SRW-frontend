@@ -1,21 +1,37 @@
 import React from 'react';
 import { MyRecipesProps } from './MyRecipes.types';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
-import { RecipeItem } from '@/components/MyRecipes/RecipeItem';
+import { RecipeItem } from 'src/components/RecipeItem';
 import { CreateRecipeBtn } from '@/components/icon-buttons/CreateRecipeBtn';
+import { useApiRequest } from '@/api/utils';
+import { recipesService } from '@/api/services';
 
-export const MyRecipes: React.FC<MyRecipesProps> = ({ recipes }) => {
+export const MyRecipes: React.FC<MyRecipesProps> = ({ user }) => {
+  const { data: recipes } = useApiRequest(recipesService.getMy, {
+    deps: [user],
+    condition: !!user,
+  });
+
   return (
     <Card sx={ { borderRadius: 4 } }>
       <CardHeader
         title={ 'Мои рецепты:' }
         action={ <CreateRecipeBtn /> }
       />
-      <CardContent>
-        <Stack spacing={ 2 }>
-          { recipes.map(recipe => (<RecipeItem key={ recipe.id } recipe={ recipe } />)) }
-        </Stack>
-      </CardContent>
+      { recipes &&
+        <CardContent>
+          <Stack spacing={ 2 }>
+            { recipes.map(recipe => (
+                <RecipeItem
+                  key={ recipe.id }
+                  recipe={ recipe }
+                  showStatus
+                />
+              ),
+            ) }
+          </Stack>
+        </CardContent>
+      }
     </Card>
   );
 };

@@ -30,15 +30,11 @@ export const DescriptionForm: React.FC = () => {
       <CenterModal
         open={ openSetDescriptionModal }
         onClose={ () => setOpenSetDescriptionModal(false) }
+        title={ 'Создать описание' }
       >
         <SetDescriptionForm onSubmit={ handleSetDescription } defaultValue={ description } />
       </CenterModal>
-      <Card
-        sx={ {
-          borderRadius: 3,
-          width: 850,
-        } }
-      >
+      <Card sx={ { borderRadius: 3 } }>
         <CardHeader
           title={ description ? description.title : 'Создайте новый рецепт' }
           action={ description
@@ -55,9 +51,16 @@ export const DescriptionForm: React.FC = () => {
                   src={ description.img }
                   alt={ 'Фотография блюда' }
                   sx={ {
-                    float: 'left',
-                    width: 400,
-                    height: 250,
+                    float: { sm: 'left' },
+                    width: {
+                      xs: '100%',
+                      sm: '50%',
+                    },
+                    height: {
+                      xs: '15em',
+                      sm: 235,
+                      lg: 270,
+                    },
                     borderRadius: 2,
                     mr: 2,
                     mb: 1,
@@ -67,7 +70,7 @@ export const DescriptionForm: React.FC = () => {
               <Stack spacing={ 2 } sx={ { mb: 3 } }>
                 <RowContainer>
                   <TimeLabel time={ description.time } />
-                  <ServingsNumberLabel servings_number={ description.servings_number } />
+                  <ServingsNumberLabel servingsNumber={ description.servings_number } />
                 </RowContainer>
               </Stack>
               <RecipeDescription description={ description.description } />

@@ -4,3 +4,4 @@ export * from './get-user-role-text';
 export * from './convert-to-base64';
 export * from './get-recipe-status-text';
 export * from './partial-by';
+export * from './round';

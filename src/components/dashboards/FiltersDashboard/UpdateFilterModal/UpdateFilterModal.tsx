@@ -19,16 +19,21 @@ export const UpdateFilterModal: React.FC<UpdateFilterModalProps> = (
   } = useErrorAlertController({
     requestFn: (data: FilterFormInputs) =>
       () => filtersService.update({ id: filter.id, ...data }),
-    closeModal: onClose,
-    onSuccess,
+    onSuccess: () => {
+      onSuccess();
+      onClose();
+    },
   });
 
   return (
     <>
       <ErrorAlert errorAlertState={ errorAlertState } />
-      <CenterModal open={ open } onClose={ onClose }>
+      <CenterModal
+        open={ open }
+        onClose={ onClose }
+        title={ 'Обновить фильтр' }
+      >
         <FilterForm
-          title={ `${ filter.name }. Обновить фильтр.` }
           onSubmit={ submitHandler }
           defaultName={ filter.name }
         />
