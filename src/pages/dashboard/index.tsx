@@ -31,4 +31,4 @@ export default function Dashboard() {
   );
 }
 
-Dashboard.layout = new LayoutConstructor().checkUserExists();
+Dashboard.layout = new LayoutConstructor().standard().checkUserExists();

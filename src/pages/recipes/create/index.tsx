@@ -14,7 +14,7 @@ import {
   SubmitButton,
 } from '@/components/page-helper-components/recipes/create/';
 import { LayoutConstructor } from '@/utils/layout-constructor';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 export default function CreateRecipe({ filters }: {
   filters: IFiltersData[]
@@ -40,9 +40,9 @@ export default function CreateRecipe({ filters }: {
   );
 }
 
-CreateRecipe.layout = new LayoutConstructor().checkUserExists();
+CreateRecipe.layout = new LayoutConstructor().standard().checkUserExists();
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { data: filters } = await executeRequest(filtersService.get);
 
   return {

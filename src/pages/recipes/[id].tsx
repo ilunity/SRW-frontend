@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import { RecipeSteps } from '@/components/RecipeSteps';
 import { IRecipeData } from '@/utils/types';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
 import { RecipeHeading } from '@/components/RecipeHeading';
 import { executeRequest } from '@/api/utils';
@@ -55,29 +55,7 @@ export default function Recipe({ recipe }: {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await executeRequest(recipesService.getSharedIds);
-
-  if (!data) {
-    throw new Error();
-  }
-
-  const paths = data.map(({ id }) => {
-    return {
-      params: {
-        id: String(id),
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // todo Добавить проверку для params === undefined
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const recipeId = (params as NextParsedUrlQuery).id;
   const { data: recipe, error } = await executeRequest(() => recipesService.get(Number(recipeId)));
 

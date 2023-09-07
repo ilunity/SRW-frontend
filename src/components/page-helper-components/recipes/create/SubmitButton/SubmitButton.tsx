@@ -13,8 +13,6 @@ export const SubmitButton: React.FC = () => {
   const dispatch = useDispatch();
 
   const createRecipe = async () => {
-    // todo create recipe validation
-
     const { description, ingredients, steps }: CreatedRecipeState = createdRecipe;
 
     if (description === null) {
