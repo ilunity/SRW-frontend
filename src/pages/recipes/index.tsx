@@ -1,48 +1,46 @@
 import { Box, Stack, useMediaQuery } from '@mui/material';
 import { GetServerSideProps } from 'next';
-import { IRecipePreview } from '@/utils/types';
+import { IRecipePreview, RECIPE_STATUS } from '@/utils/types';
 import { executeRequest } from '@/api/utils';
-import { filtersService, recipesService } from '@/api/services';
-import { FiltersKeys, IFiltersData } from '@/api/interfaces/filters.types';
-import { isString } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
+import { categoriesService, recipesService } from '@/api/services';
+import { ICategory } from '@/api/interfaces/categories.types';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useDebounce } from 'use-debounce';
 import { useEffect } from 'react';
-import { FiltersForm } from '@/components/forms/FiltersForm';
+import { CategoriesForm } from '@/components/forms/CategoriesForm';
 import { RecipesGrid } from '@/components/RecipesGrid';
-import { FiltersDrawer } from 'src/components/drawers/FiltersDrawer';
+import { CategoriesDrawer } from 'src/components/drawers/CategoriesDrawer';
 import { Theme } from '@mui/system';
+import { isString } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
 
-const FILTERS_DEBOUNCE_DELAY = 2000;
+const CATEGORIES_DEBOUNCE_DELAY = 2000;
 
 
-export default function Recipes({ recipes, filters }: {
+export default function Recipes({ recipes, categories }: {
   recipes: IRecipePreview[],
-  filters: IFiltersData[],
+  categories: ICategory[],
 }) {
   const router = useRouter();
 
-  const selectedFilters = useSelector((state: RootState) => state.selectedFilters);
-  const [selectedFiltersDebounced] = useDebounce(selectedFilters, FILTERS_DEBOUNCE_DELAY);
+  const selectedCategories = useSelector((state: RootState) => state.selectedCategories);
+  const [selectedCategoriesDebounced] = useDebounce(selectedCategories, CATEGORIES_DEBOUNCE_DELAY);
 
   const mediaQueryLg: boolean = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   useEffect(() => {
-    if (selectedFiltersDebounced.length === 0) {
+    if (selectedCategoriesDebounced.length === 0) {
       router.push({
         href: '/',
       });
     } else {
-      const filters_keys = selectedFiltersDebounced.map(({ left_key, right_key }) => ({
-        left: left_key,
-        right: right_key,
-      }));
-      router.query.filters_keys = JSON.stringify(filters_keys);
+      const categoryIds = selectedCategoriesDebounced.map(({ id }) => id);
+
+      router.query.categories = JSON.stringify(categoryIds);
       router.push(router);
     }
-  }, [selectedFiltersDebounced]);
+  }, [selectedCategoriesDebounced]);
 
   return (
     <Box>
@@ -68,9 +66,9 @@ export default function Recipes({ recipes, filters }: {
                 flexShrink: 0,
               } }
             >
-              <FiltersForm filters={ filters } />
+              <CategoriesForm categories={ categories } />
             </Stack>
-            : <FiltersDrawer filters={ filters } />
+            : <CategoriesDrawer categories={ categories } />
           }
           <RecipesGrid recipes={ recipes } />
         </Stack>
@@ -80,17 +78,21 @@ export default function Recipes({ recipes, filters }: {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const queryFilters = isString(query.filters_keys)
-    ? JSON.parse(query.filters_keys) as FiltersKeys[]
+  const categoriesQuery = isString(query.categories)
+    ? JSON.parse(query.categories) as number[]
     : undefined;
 
-  const { data: recipes } = await executeRequest(() => recipesService.getShared(queryFilters));
-  const { data: filters } = await executeRequest(filtersService.get);
+  const { data: recipes } = await executeRequest(() => recipesService.getPreview({
+    status: RECIPE_STATUS.SHARED,
+    categories: categoriesQuery,
+  }));
+
+  const { data: categories } = await executeRequest(categoriesService.get);
 
   return {
     props: {
       recipes,
-      filters,
+      categories,
     },
   };
 };

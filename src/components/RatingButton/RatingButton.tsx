@@ -3,7 +3,7 @@ import { RatingButtonProps } from './RatingButton.types';
 import { Rating } from '@mui/material';
 import { IApiError } from '@/api/utils/api.types';
 import { executeRequest, stringifyErrorMessage, useApiRequest } from '@/api/utils';
-import { userService } from '@/api/services';
+import { recipesService } from '@/api/services';
 import { AlertSnackbar } from '@/components/AlertSnackbar';
 
 export const RatingButton: React.FC<RatingButtonProps> = ({ recipeId }) => {
@@ -11,7 +11,7 @@ export const RatingButton: React.FC<RatingButtonProps> = ({ recipeId }) => {
   const [error, setError] = useState<IApiError | null>(null);
 
   const { data: rating } = useApiRequest(
-    async () => await userService.getRating(recipeId),
+    async () => await recipesService.getRating(recipeId),
     { deps: [updateButtonCounter] },
   );
 
@@ -20,7 +20,7 @@ export const RatingButton: React.FC<RatingButtonProps> = ({ recipeId }) => {
       return handleRemoveRating();
     }
 
-    const updateFunction = rating ? userService.updateRatingScore : userService.rateRecipe;
+    const updateFunction = rating ? recipesService.updateRatingScore : recipesService.rate;
     const { error } = await executeRequest(() => updateFunction(recipeId, score));
 
     if (error) {
@@ -30,7 +30,7 @@ export const RatingButton: React.FC<RatingButtonProps> = ({ recipeId }) => {
   };
 
   const handleRemoveRating = async () => {
-    const { error } = await executeRequest(() => userService.deleteRating(recipeId));
+    const { error } = await executeRequest(() => recipesService.deleteRating(recipeId));
 
     if (error) {
       return setError(error);

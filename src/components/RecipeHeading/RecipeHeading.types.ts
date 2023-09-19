@@ -1,5 +1,5 @@
-import { IRecipeData } from '@/api/interfaces/recipes.types';
+import { IRecipeFull } from '@/api/interfaces/recipes.types';
 
 export interface RecipeHeadingProps {
-  recipe: IRecipeData;
+  recipe: IRecipeFull;
 }

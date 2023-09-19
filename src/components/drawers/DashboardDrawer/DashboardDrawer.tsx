@@ -3,7 +3,7 @@ import { DashboardDrawerProps } from './DashboardDrawer.types';
 import { Divider, List } from '@mui/material';
 import { ProductsDashboardListItem } from '@/components/dashboards/ProductsDashboard/ProductsDashboardListItem';
 import { DASHBOARD_ITEMS_NAMES } from '@/utils/dashboard-items';
-import { FiltersDashboardListItem } from '@/components/dashboards/FiltersDashboard/FiltersDashboardListItem';
+import { CategoriesDashboardListItem } from '@/components/dashboards/CategoriesDashboard/CategoriesDashboardListItem';
 import { SwipeableDrawer } from '@/components/drawers/SwipeableDrawer';
 import { PermanentDrawer } from '@/components/drawers/DashboardDrawer/PermanentDrawer';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -28,8 +28,8 @@ export const DashboardDrawer: React.FC<DashboardDrawerProps> = (
         selected={ currentDashboardItem === DASHBOARD_ITEMS_NAMES.PRODUCTS }
         setCurrentDashboardItem={ setDashboardItem }
       />
-      <FiltersDashboardListItem
-        selected={ currentDashboardItem === DASHBOARD_ITEMS_NAMES.FILTERS }
+      <CategoriesDashboardListItem
+        selected={ currentDashboardItem === DASHBOARD_ITEMS_NAMES.CATEGORIES }
         setCurrentDashboardItem={ setDashboardItem }
       />
       <Divider sx={ { my: 1 } } />

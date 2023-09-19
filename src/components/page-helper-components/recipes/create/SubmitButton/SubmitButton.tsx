@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { clearCreatedRecipe, clearFilters, CreatedRecipeState } from '@/redux/slices';
+import { clearCategories, clearCreatedRecipe, CreatedRecipeState } from '@/redux/slices';
 import { CreateRecipeDto } from '@/api/interfaces/recipes.types';
 import { executeRequest } from '@/api/utils';
 import { recipesService } from '@/api/services';
@@ -9,7 +9,7 @@ import { RootState } from '@/redux/store';
 
 export const SubmitButton: React.FC = () => {
   const createdRecipe = useSelector((state: RootState) => state.createdRecipe);
-  const selectedFilters = useSelector((state: RootState) => state.selectedFilters);
+  const selectedCategories = useSelector((state: RootState) => state.selectedCategories);
   const dispatch = useDispatch();
 
   const createRecipe = async () => {
@@ -20,15 +20,15 @@ export const SubmitButton: React.FC = () => {
     }
 
     const createRecipeDto: CreateRecipeDto = {
-      description: description,
+      ...description,
       ingredients: ingredients.map(({ id, ...rest }) => ({ product_id: id, ...rest })),
       steps,
-      filters: selectedFilters.map(filter => ({ filter_id: filter.id })),
+      categories: selectedCategories.map(({ id }) => id),
     };
 
     await executeRequest(() => recipesService.create(createRecipeDto));
     dispatch(clearCreatedRecipe());
-    dispatch(clearFilters());
+    dispatch(clearCategories());
   };
 
 
