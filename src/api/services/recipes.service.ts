@@ -1,14 +1,14 @@
 import { ApiRequestFnResponse } from '@/api/utils/api.types';
 import { axiosInstance, HeadersConstructor } from '@/api/utils';
 import {
-  Comment,
   CommentRecipeDto,
   CreateRecipeDto,
-  IRecipeData,
+  GetRecipePreviewDto,
+  IFavouriteRecipe,
+  IRating,
+  IRecipeFull,
   IRecipePreview,
-  IRecipesIds,
 } from '@/api/interfaces/recipes.types';
-import { FiltersKeys } from '@/api/interfaces/filters.types';
 
 const url = 'recipe/';
 
@@ -19,30 +19,19 @@ class RecipesService {
     });
   }
 
-  get(recipeId: number): ApiRequestFnResponse<IRecipeData> {
-    return axiosInstance.get(`${ url }${ recipeId }/`);
+  get(recipeId: number): ApiRequestFnResponse<IRecipeFull> {
+    return axiosInstance.get(`${ url }${ recipeId }`);
   }
 
-  getShared(filters?: FiltersKeys[]): ApiRequestFnResponse<IRecipePreview[]> {
-    return axiosInstance.post(`${ url }shared/`, {
-      filters_keys: filters,
-    });
-  }
+  getPreview({ categories, status, belongTo }: GetRecipePreviewDto): ApiRequestFnResponse<IRecipePreview[]> {
+    const categoriesParam = categories ? `categories=${ categories.join() }&` : '';
+    const statusParam = status ? `status=${ status }&` : '';
+    const belongToParam = belongTo ? `belongTo=${ belongTo }&` : '';
 
-  getMy(): ApiRequestFnResponse<IRecipePreview[]> {
-    return axiosInstance.get(`${ url }my/`, {
-      headers: new HeadersConstructor().authorization(),
-    });
-  }
-
-  getSharedIds(): ApiRequestFnResponse<IRecipesIds[]> {
-    return axiosInstance.get(`${ url }ids/`);
-  }
-
-  getCreated(): ApiRequestFnResponse<IRecipeData[]> {
-    return axiosInstance.get(`${ url }created/`, {
-      headers: new HeadersConstructor().authorization(),
-    });
+    return axiosInstance.get(
+      `${ url }preview?${ categoriesParam }${ statusParam }${ belongToParam }`,
+      { headers: new HeadersConstructor().authorization() },
+    );
   }
 
   comment(recipeId: number, comment: CommentRecipeDto): ApiRequestFnResponse<Comment> {
@@ -51,8 +40,44 @@ class RecipesService {
     });
   }
 
-  public getAllFavouriteRecipes(): ApiRequestFnResponse<IRecipePreview[]> {
-    return axiosInstance.get(`${ url }favourite`, {
+  addFavourite(recipeId: number): ApiRequestFnResponse<IFavouriteRecipe> {
+    return axiosInstance.post(`${ url }${ recipeId }/favourite`, {}, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public isFavourite(recipeId: number): ApiRequestFnResponse<boolean> {
+    return axiosInstance.get(`${ url }${ recipeId }/favourite`, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public deleteFavourite(recipeId: number): ApiRequestFnResponse<void> {
+    return axiosInstance.delete(`${ url }${ recipeId }/favourite`, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public rate(recipeId: number, score: number): ApiRequestFnResponse<IRating> {
+    return axiosInstance.post(`${ url }${ recipeId }/rating`, { score }, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public getRating(recipeId: number): ApiRequestFnResponse<IRating> {
+    return axiosInstance.get(`${ url }${ recipeId }/rating`, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public updateRatingScore(recipeId: number, score: number): ApiRequestFnResponse<IRating> {
+    return axiosInstance.patch(`${ url }${ recipeId }/rating`, { score }, {
+      headers: new HeadersConstructor().authorization(),
+    });
+  }
+
+  public deleteRating(recipeId: number): ApiRequestFnResponse<void> {
+    return axiosInstance.delete(`${ url }${ recipeId }/rating`, {
       headers: new HeadersConstructor().authorization(),
     });
   }

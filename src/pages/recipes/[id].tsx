@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { RecipeSteps } from '@/components/RecipeSteps';
-import { IRecipeData } from '@/utils/types';
+import { IRecipeFull } from '@/utils/types';
 import { GetServerSideProps } from 'next';
 import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
 import { RecipeHeading } from '@/components/RecipeHeading';
@@ -16,7 +16,7 @@ import {
 } from 'src/components/page-helper-components/recipes/id/ResponsiveRecipeIngredients';
 
 export default function Recipe({ recipe }: {
-  recipe: IRecipeData
+  recipe: IRecipeFull
 }) {
   const user = useSelector((state: RootState) => state.user.payload);
 

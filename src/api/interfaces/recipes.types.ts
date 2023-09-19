@@ -1,7 +1,8 @@
-import { IUser, USER_ROLE } from '@/utils/types/user';
+import { IUser } from '@/utils/types/user';
 import { IProduct, MEASUREMENT_TYPE } from '@/utils/types/product';
 import { IRecipeStep } from '@/utils/types/recipeStep';
-import { IFiltersData } from '@/api/interfaces/filters.types';
+import { ICategory } from '@/api/interfaces/categories.types';
+import { RecipeComment } from '@/api/interfaces/comment.types';
 
 export enum RECIPE_STATUS {
   CREATED = 'CREATED',
@@ -9,66 +10,32 @@ export enum RECIPE_STATUS {
   SHARED = 'SHARED',
 }
 
-interface RecipeFilter {
-  id: number;
-  filter: IFiltersData;
-}
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  role: USER_ROLE;
-  avatar: string;
-}
-
-export interface Comment {
-  id: number,
-  text: string,
-  createdAt: string,
-  updatedAt: string,
-  userId: number,
-  recipeId: number,
-}
-
-export type RecipeComment = Omit<Comment, 'userId' | 'recipeId'> & {
-  user: User,
-}
-
-export interface IRecipeData {
+export interface IRecipeEntity {
   id: number;
   title: string;
-  img: string;
-  description: string;
   time: number;
+  img: string;
   servings_number: number;
+  description: string;
   status: RECIPE_STATUS;
+  user_id: number;
+}
+
+export type IRecipeFull = Omit<IRecipeEntity, 'user_id'> & {
   avg_rating: string | null;
   favourites: string;
   user: IUser;
   comments: RecipeComment[],
   steps: IRecipeStep[];
-  filters: RecipeFilter[],
+  categories: ICategory[],
   products: IProduct[];
 }
 
-export type IRecipePreview = Omit<IRecipeData, 'steps' | 'filters'> & {
+export type IRecipePreview = Omit<IRecipeFull, 'steps' | 'categories' | 'comments'> & {
   readonly comments_number: string;
 }
 
-export interface IRecipesIds {
-  id: number;
-}
-
 // DTOs
-
-interface DescriptionDto {
-  readonly title: string;
-  readonly time: number;
-  readonly servings_number: number;
-  readonly description: string;
-  readonly img: string;
-}
 
 interface RecipeProductDto {
   readonly product_id: number;
@@ -81,17 +48,47 @@ interface RecipeStepDto {
   readonly img?: string;
 }
 
-interface RecipeFilterDto {
-  readonly filter_id: number;
-}
-
 export interface CreateRecipeDto {
-  readonly description: DescriptionDto;
+  readonly title: string;
+  readonly time: number;
+  readonly servings_number: number;
+  readonly description: string;
+  readonly img: string;
   readonly ingredients: RecipeProductDto[];
   readonly steps: RecipeStepDto[];
-  readonly filters: RecipeFilterDto[];
+  readonly categories: number[];
 }
 
 export interface CommentRecipeDto {
   readonly text: string;
+}
+
+
+export enum RECIPE_BELONGING {
+  MY = 'MY',
+  FAVOURITE = 'FAVOURITE',
+}
+
+export interface GetRecipePreviewDto {
+  categories?: number[];
+  status?: `${ RECIPE_STATUS }`;
+  belongTo?: `${ RECIPE_BELONGING }`;
+}
+
+
+// FavouriteRecipe
+
+export interface IFavouriteRecipe {
+  id: number;
+  recipe_id: number;
+  user_id: number;
+}
+
+// Rating
+
+export interface IRating {
+  id: number,
+  score: number,
+  user_id: number,
+  recipe_id: number
 }
