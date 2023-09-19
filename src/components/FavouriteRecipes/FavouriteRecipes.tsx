@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { RecipeItem } from 'src/components/RecipeItem';
 import { useApiRequest } from '@/api/utils';
-import { recipesService, userService } from '@/api/services';
+import { recipesService } from '@/api/services';
 import { ErrorAlert, useErrorAlertController } from '@/components/ErrorAlert';
+import { RECIPE_BELONGING } from '@/api/interfaces/recipes.types';
 
 export const FavouriteRecipes: React.FC = () => {
   const [updateButtonCounter, setUpdateButtonCounter] = useState<number>(0);
-  const { data: favouriteRecipes } = useApiRequest(recipesService.getAllFavouriteRecipes, { deps: [updateButtonCounter] });
+  const { data: favouriteRecipes } = useApiRequest(
+    () => recipesService.getPreview({ belongTo: RECIPE_BELONGING.FAVOURITE }),
+    { deps: [updateButtonCounter] },
+  );
 
   const {
     errorAlertState,
     submitHandler: deleteFavouriteRecipeHandler,
   } = useErrorAlertController({
     requestFn: (recipeId: number) =>
-      () => userService.deleteFavouriteRecipe(recipeId),
+      () => recipesService.deleteFavourite(recipeId),
     onSuccess: () => setUpdateButtonCounter(prevState => prevState + 1),
   });
 

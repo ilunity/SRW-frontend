@@ -2,10 +2,10 @@ import { Box } from '@mui/material';
 import { IngredientsForm } from '@/components/forms/IngredientsForm';
 import { StepsForm } from '@/components/forms/StepsForm';
 import { DescriptionForm } from '@/components/forms/DescriptionForm';
-import { FiltersForm } from '@/components/forms/FiltersForm';
-import { IFiltersData } from '@/api/interfaces/filters.types';
+import { CategoriesForm } from '@/components/forms/CategoriesForm';
+import { ICategory } from '@/api/interfaces/categories.types';
 import { executeRequest } from '@/api/utils';
-import { filtersService } from '@/api/services';
+import { categoriesService } from '@/api/services';
 import { PageContainer } from '@/components/PageContainer';
 import {
   FirstColumnContainer,
@@ -16,8 +16,8 @@ import {
 import { LayoutConstructor } from '@/utils/layout-constructor';
 import { GetServerSideProps } from 'next';
 
-export default function CreateRecipe({ filters }: {
-  filters: IFiltersData[]
+export default function CreateRecipe({ categories }: {
+  categories: ICategory[]
 }) {
   return (
     <PageContainer>
@@ -31,7 +31,7 @@ export default function CreateRecipe({ filters }: {
             <IngredientsForm />
           </Box>
           <Box width={ '100%' }>
-            <FiltersForm filters={ filters } />
+            <CategoriesForm categories={ categories } />
           </Box>
         </SecondColumnContainer>
       </MainContainer>
@@ -43,11 +43,11 @@ export default function CreateRecipe({ filters }: {
 CreateRecipe.layout = new LayoutConstructor().standard().checkUserExists();
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: filters } = await executeRequest(filtersService.get);
+  const { data: categories } = await executeRequest(categoriesService.get);
 
   return {
     props: {
-      filters,
+      categories,
     },
   };
 };

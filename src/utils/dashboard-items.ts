@@ -1,12 +1,12 @@
 import { ProductsDashboard } from 'src/components/dashboards/ProductsDashboard';
-import { FiltersDashboard } from '@/components/dashboards/FiltersDashboard';
+import { CategoriesDashboard } from 'src/components/dashboards/CategoriesDashboard';
 
 export enum DASHBOARD_ITEMS_NAMES {
   PRODUCTS = 'PRODUCTS',
-  FILTERS = 'FILTERS',
+  CATEGORIES = 'CATEGORIES',
 }
 
 export const DASHBOARD_ITEMS: Record<string, React.FC> = {
   [DASHBOARD_ITEMS_NAMES.PRODUCTS]: ProductsDashboard,
-  [DASHBOARD_ITEMS_NAMES.FILTERS]: FiltersDashboard,
+  [DASHBOARD_ITEMS_NAMES.CATEGORIES]: CategoriesDashboard,
 };

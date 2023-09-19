@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createdRecipeReducer, selectedFiltersReducer, themeReducer, userExpiredReducer, userReducer } from './slices';
+import { createdRecipeReducer, selectedCategoriesReducer, themeReducer, userExpiredReducer, userReducer } from './slices';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 
@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   theme: themeReducer,
   createdRecipe: createdRecipeReducer,
-  selectedFilters: selectedFiltersReducer,
+  selectedCategories: selectedCategoriesReducer,
 });
 
 
@@ -17,7 +17,7 @@ const persistConfig = {
   version: 1,
   storage,
   transforms: [userExpiredReducer],
-  blacklist: ['selectedFilters'],
+  blacklist: ['selectedCategories'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

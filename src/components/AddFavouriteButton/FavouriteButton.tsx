@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red } from '@mui/material/colors';
 import { executeRequest, stringifyErrorMessage, useApiRequest } from '@/api/utils';
-import { userService } from '@/api/services';
+import { recipesService } from '@/api/services';
 import ClearIcon from '@mui/icons-material/Clear';
 import { AlertSnackbar } from '@/components/AlertSnackbar';
 import { IApiError } from '@/api/utils/api.types';
@@ -13,13 +13,13 @@ export const FavouriteButton: React.FC<FavouriteButtonProps> = ({ recipeId }) =>
   const [updateButtonCounter, setUpdateButtonCounter] = useState<number>(0);
   const [error, setError] = useState<IApiError | null>(null);
 
-  const { data: favouriteRecipe, status } = useApiRequest(
-    async () => await userService.getFavouriteRecipe(recipeId),
+  const { data: isFavouriteRecipe, status } = useApiRequest(
+    async () => await recipesService.isFavourite(recipeId),
     { deps: [updateButtonCounter] },
   );
 
   const handleAddFavourite = async () => {
-    const { error } = await executeRequest(() => userService.addFavouriteRecipe(recipeId));
+    const { error } = await executeRequest(() => recipesService.addFavourite(recipeId));
 
     if (error) {
       return setError(error);
@@ -28,7 +28,7 @@ export const FavouriteButton: React.FC<FavouriteButtonProps> = ({ recipeId }) =>
   };
 
   const handleRemoveFavourite = async () => {
-    const { error } = await executeRequest(() => userService.deleteFavouriteRecipe(recipeId));
+    const { error } = await executeRequest(() => recipesService.deleteFavourite(recipeId));
 
     if (error) {
       return setError(error);
@@ -49,7 +49,7 @@ export const FavouriteButton: React.FC<FavouriteButtonProps> = ({ recipeId }) =>
         } }
         autoHideDuration={ 3000 }
       />
-      { status === 'success' && favouriteRecipe
+      { status === 'success' && isFavouriteRecipe
         ? (
           <Button
             variant={ 'outlined' }
