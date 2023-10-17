@@ -14,7 +14,7 @@ const url = 'recipe/';
 
 class RecipesService {
   create(recipe: CreateRecipeDto) {
-    return axiosInstance.post(`${ url }combined/`, recipe, {
+    return axiosInstance.post(url, recipe, {
       headers: new HeadersConstructor().authorization(),
     });
   }
